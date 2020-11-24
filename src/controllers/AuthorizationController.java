@@ -95,7 +95,7 @@ public class AuthorizationController {
         signUpButton.getScene().getWindow().hide();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("registration.fxml"));
+        loader.setLocation(getClass().getResource("../views/registration.fxml"));
 
         try{
             loader.load();

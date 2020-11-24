@@ -13,27 +13,29 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
     <tabs>
-        <Tab text="products">
+        <Tab text="товары">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="535.0">
                     <children>
-                        <Button fx:id="buttonEditProd" layoutX="29.0" layoutY="140.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Edit" />
-                        <Button fx:id="buttonShowProd" layoutX="29.0" layoutY="24.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Show" />
-                        <Button fx:id="buttonDeleteProd" layoutX="29.0" layoutY="198.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Delete" />
-                        <Button fx:id="buttonAddProd" layoutX="29.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Add" />
-                        <AnchorPane layoutX="151.0" layoutY="42.0" minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="474.0">
+                        <Button fx:id="buttonEditProd" layoutX="29.0" layoutY="140.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Изменить" />
+                        <Button fx:id="buttonShowProd" layoutX="29.0" layoutY="24.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Просмотр" />
+                        <Button fx:id="buttonDeleteProd" layoutX="29.0" layoutY="198.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Удалить" />
+                        <Button fx:id="buttonAddProd" layoutX="29.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Добавить" />
+                        <AnchorPane layoutX="151.0" layoutY="42.0" minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="448.0">
                             <children>
-                                <TableView fx:id="prodTableView" layoutX="-15.0" layoutY="-19.0" prefHeight="271.0" prefWidth="500.0">
+                                <TableView fx:id="prodTableView" layoutX="-22.0" layoutY="-19.0" prefHeight="271.0" prefWidth="538.0">
                                     <columns>
-                                        <TableColumn fx:id="prodCol_1" prefWidth="75.0" text="id" />
-                                        <TableColumn fx:id="prodCol_2" prefWidth="195.0" text="name" />
-                                        <TableColumn fx:id="prodCol_3" prefWidth="121.0" text="price" />
-                                        <TableColumn fx:id="prodCol_4" prefWidth="95.0" text="amount" />
+                                        <TableColumn fx:id="prodCol_1" prefWidth="52.0" text="номер" />
+                                        <TableColumn fx:id="prodCol_2" prefWidth="166.0" text="название товара" />
+                                        <TableColumn fx:id="prodCol_3" prefWidth="51.0" text="цена" />
+                                        <TableColumn fx:id="prodCol_4" prefWidth="68.0" text="кол-во" />
+                                        <TableColumn fx:id="prodCol_5" prefWidth="75.0" text="тип товара" />
+                                        <TableColumn fx:id="prodCol_6" prefWidth="124.0" text="производитель" />
                                     </columns>
                                 </TableView>
                             </children>
                         </AnchorPane>
-                        <Button fx:id="buttonSearchProducts" layoutX="340.0" layoutY="325.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Search" />
+                        <Button fx:id="buttonSearchProducts" layoutX="340.0" layoutY="325.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Поиск" />
                         <ChoiceBox fx:id="choiceBoxForProducts" layoutX="160.0" layoutY="325.0" prefHeight="31.0" prefWidth="158.0" />
                         <Label fx:id="labelSearchProductsInfo" layoutX="350.0" layoutY="377.0" prefHeight="21.0" prefWidth="92.0" text="incorrect input" textFill="#eb0808" visible="false">
                             <font>
@@ -41,12 +43,12 @@
                             </font>
                         </Label>
                         <TextField fx:id="textForProductsSearching" layoutX="160.0" layoutY="372.0" prefHeight="31.0" prefWidth="159.0" promptText="data for searching" />
-                        <Label layoutX="89.0" layoutY="332.0" text="search by" />
-                        <Label layoutX="89.0" layoutY="379.0" text="input data" />
+                        <Label layoutX="89.0" layoutY="332.0" text="поиск по" />
+                        <Label layoutX="36.0" layoutY="379.0" text="данные для поиска" />
                     </children></AnchorPane>
             </content>
         </Tab>
-        <Tab text="orders">
+        <Tab text="заказы">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
@@ -78,7 +80,7 @@
                     </children></AnchorPane>
             </content>
         </Tab>
-        <Tab text="users">
+        <Tab text="пользователи">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
@@ -110,5 +112,15 @@
                     </children></AnchorPane>
             </content>
         </Tab>
+      <Tab text="поставки">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+      <Tab text="производители">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
     </tabs>
 </TabPane>

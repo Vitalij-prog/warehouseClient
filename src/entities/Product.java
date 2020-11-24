@@ -7,12 +7,24 @@ public class Product implements Serializable {
     private String name;
     private Double price;
     private Integer amount;
+    private Integer manufacturer_id;
+    private String type;
+    private String manufacturer;
 
-    public Product(int id, String name, double price, int amount) {
+    public Product(int id, String name, double price, int amount, int manufacturer_id) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.amount = amount;
+        this.manufacturer_id = manufacturer_id;
+    }
+    public Product(int id, String name, double price, int amount, String type, String manufacturer) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+        this.type = type;
+        this.manufacturer = manufacturer;
     }
     public Product(String name) {
         this.name = name;
@@ -33,4 +45,11 @@ public class Product implements Serializable {
     public String getName() {
         return name;
     }
+
+    public String getType() { return type; }
+
+    public Integer getManufacturerId() { return manufacturer_id; }
+
+    public String getManufacturer() { return manufacturer; }
+
 }

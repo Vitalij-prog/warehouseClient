@@ -42,7 +42,7 @@
                                 <TableColumn fx:id="prodCol_4" prefWidth="106.0" text="amount" />
                             </columns>
                         </TableView>
-                        <Button fx:id="buttonShowProducts" layoutX="49.0" layoutY="33.0" mnemonicParsing="false" onAction="#showProducts" prefHeight="34.0" prefWidth="70.0" text="Show" />
+                        <Button fx:id="buttonShowProducts" layoutX="49.0" layoutY="33.0" mnemonicParsing="false"  prefHeight="34.0" prefWidth="70.0" text="Show" />
                         <ChoiceBox fx:id="choiceBoxForSearchingProducts" layoutX="22.0" layoutY="127.0" prefHeight="32.0" prefWidth="123.0" />
                         <Label layoutX="59.0" layoutY="99.0" text="search by" />
                         <Label fx:id="labelProductNotFound" layoutX="44.0" layoutY="216.0" text="data not found" textFill="#e10808" visible="false" />
@@ -55,7 +55,7 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Button fx:id="buttonShow" layoutX="153.0" layoutY="290.0" mnemonicParsing="false" onAction="#selectOrders" text="Show" />
+                        <Button fx:id="buttonShow" layoutX="153.0" layoutY="290.0" mnemonicParsing="false" text="Show" />
                         <Button fx:id="buttonOrder" layoutX="377.0" layoutY="290.0" mnemonicParsing="false" text="Order" />
                         <TableView fx:id="tableOrders" layoutX="27.0" layoutY="26.0" prefHeight="236.0" prefWidth="546.0">
                             <columns>

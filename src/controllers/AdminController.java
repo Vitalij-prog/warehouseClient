@@ -42,6 +42,10 @@ public class AdminController {
     private TableColumn<Product, Double> prodCol_3;
     @FXML
     private TableColumn<Product, Integer> prodCol_4;
+    @FXML
+    private TableColumn<Product, String> prodCol_5;
+    @FXML
+    private TableColumn<Product, String> prodCol_6;
 
     @FXML
     private Button buttonAddProd;
@@ -120,17 +124,15 @@ public class AdminController {
     @FXML
     private TableColumn<User, String> col_userRole;
 
-
-
     @FXML
     void initialize() {
         ObservableList<String>  orderOptions = FXCollections.observableArrayList("product_name", "user_name","price", "date");
         choiceBoxForSearching.setItems(orderOptions);
         choiceBoxForSearching.setValue("product_name");
 
-        ObservableList<String>  productOptions = FXCollections.observableArrayList("product_name", "product_price", "amount");
+        ObservableList<String>  productOptions = FXCollections.observableArrayList("по номеру","по названию", "по количеству", "по производителю");
         choiceBoxForProducts.setItems(productOptions);
-        choiceBoxForProducts.setValue("product_name");
+        choiceBoxForProducts.setValue("по названию");
 
         ObservableList<String>  userRole = FXCollections.observableArrayList("user", "admin");
         choiceBoxUserRole.setItems(userRole);
@@ -203,13 +205,15 @@ public class AdminController {
             prodCol_2.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
             prodCol_3.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
             prodCol_4.setCellValueFactory(new PropertyValueFactory<Product, Integer>("amount"));
+            prodCol_5.setCellValueFactory(new PropertyValueFactory<Product, String>("type"));
+            prodCol_6.setCellValueFactory(new PropertyValueFactory<Product, String>("manufacturer"));
             prodTableView.setItems(products);
         });
 
         buttonAddProd.setOnAction(event -> {
             Stage primaryStage = (Stage) buttonAddProd.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("addProduct.fxml"));
+            loader.setLocation(getClass().getResource("../views/addProduct.fxml"));
 
             try{
                 loader.load();
@@ -222,7 +226,7 @@ public class AdminController {
             stage.setScene(new Scene(main));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(primaryStage);
-            stage.show();
+            stage.showAndWait();
         });
 
         buttonEditProd.setOnAction(event -> {
@@ -267,7 +271,7 @@ public class AdminController {
         buttonSearchProducts.setOnAction(event -> {
             if(textForProductsSearching.getText().equals("")) {
 
-                labelSearchProductsInfo.setText("the empty field");
+                labelSearchProductsInfo.setText("поле не заполнено");
                 labelSearchProductsInfo.setVisible(true);
             } else {
                 labelSearchProductsInfo.setVisible(false);
@@ -288,13 +292,14 @@ public class AdminController {
                         prodCol_2.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
                         prodCol_3.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
                         prodCol_4.setCellValueFactory(new PropertyValueFactory<Product, Integer>("amount"));
-                        prodTableView.setItems(products);
+                        prodCol_5.setCellValueFactory(new PropertyValueFactory<Product, String>("type"));
+                        prodCol_6.setCellValueFactory(new PropertyValueFactory<Product, String>("manufacturer"));
                     } else {
-                        labelSearchProductsInfo.setText("data not found");
+                        labelSearchProductsInfo.setText("данные не найдены");
                         labelSearchProductsInfo.setVisible(true);
                     }
                 } else {
-                    labelSearchProductsInfo.setText("incorrect input");
+                    labelSearchProductsInfo.setText("некорректный ввод");
                     labelSearchProductsInfo.setVisible(true);
                 }
             }

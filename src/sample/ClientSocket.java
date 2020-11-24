@@ -21,7 +21,9 @@ public class ClientSocket extends Application {
     private static ObjectOutputStream objectOutputStream;
     private static ObjectInputStream objectInputStream;
 
-    public static String userName;
+    public static String userName; //user object/ session data
+
+    public static User user;
 
     public ClientSocket(String addr, int port) {
         try {
@@ -68,6 +70,22 @@ public class ClientSocket extends Application {
         }*/
         return answer;
     }
+    public static String registrationByUser(User user) {
+        String str = "user/signup";
+        String answer = "";
+        try {
+            objectOutputStream.writeObject(str);
+            objectOutputStream.writeObject(user);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (answer.equals("success")) {
+            return user.getRole();
+        }
+        return answer;
+    }
 
     public static String registrationByUser(String login, String password) throws Exception {
         String str = "signup" + "/" + login + "/" + password;
@@ -84,7 +102,7 @@ public class ClientSocket extends Application {
     }
 
     public static ArrayList<Product> getListProducts() throws Exception {
-        objectOutputStream.writeObject("getListProducts");
+        objectOutputStream.writeObject("product/getList");
 
         ArrayList<Product> list = (ArrayList<Product>) objectInputStream.readObject();
         return list;
@@ -130,7 +148,7 @@ public class ClientSocket extends Application {
 
         objectOutputStream.writeObject("add/product");
 
-        Product pr = new Product(0, prod_name, price, amount);
+        Product pr = new Product(0, prod_name, price, amount,0);
         objectOutputStream.writeObject(pr);
 
         String answer = (String) objectInputStream.readObject();
@@ -142,7 +160,7 @@ public class ClientSocket extends Application {
 
         objectOutputStream.writeObject("edit/product");
 
-        Product pr = new Product(id, name, price, amount);
+        Product pr = new Product(id, name, price, amount, 0);
         objectOutputStream.writeObject(pr);
 
         String answer = (String) objectInputStream.readObject();
@@ -153,7 +171,7 @@ public class ClientSocket extends Application {
 
         objectOutputStream.writeObject("del/product");
 
-        Product pr = new Product(id,"",0,0);
+        Product pr = new Product(id,"",0,0,0);
         objectOutputStream.writeObject(pr);
 
         String answer = (String) objectInputStream.readObject();
