@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 
 public class InputCheck {
 
-    public static final int LENGTH_PRODUCT_NAME = 20;
-    public static final int LENGTH_USER_NAME = 20;
+    public static final int LENGTH_PRODUCT_NAME = 30;
+    public static final int LENGTH_USER_NAME = 30;
     public static final int LENGTH_USER_PASSWORD = 30;
     public static boolean isCorrectString(String str, int correct_size) {
         if(str.length() <= correct_size) {

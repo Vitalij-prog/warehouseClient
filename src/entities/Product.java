@@ -11,7 +11,7 @@ public class Product implements Serializable {
     private String type;
     private String manufacturer;
 
-    public Product(int id, String name, double price, int amount, int manufacturer_id) {
+    public Product(int id, String name, int amount, double price, int manufacturer_id) {
         this.id = id;
         this.name = name;
         this.price = price;

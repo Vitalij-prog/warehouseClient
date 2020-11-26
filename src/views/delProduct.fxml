@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DelProductController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="136.0" layoutY="24.0" text="Удаление товара">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="136.0" layoutY="83.0" text="Введите номер товра:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="id" layoutX="139.0" layoutY="112.0" prefHeight="32.0" prefWidth="136.0" promptText="номер товара" />
+      <Label fx:id="delMessage" layoutX="135.0" layoutY="159.0" text="данные успешно удалены" textFill="#18e822" visible="false" />
+      <Button fx:id="delButton" alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="208.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="64.0" text="Удалить" />
+      <Label fx:id="notFoundMessage" layoutX="284.0" layoutY="120.0" text="номер не найден" textFill="#e10e0e" visible="false" />
+   </children>
+</AnchorPane>

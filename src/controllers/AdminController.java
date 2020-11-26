@@ -130,7 +130,7 @@ public class AdminController {
         choiceBoxForSearching.setItems(orderOptions);
         choiceBoxForSearching.setValue("product_name");
 
-        ObservableList<String>  productOptions = FXCollections.observableArrayList("по номеру","по названию", "по количеству", "по производителю");
+        ObservableList<String>  productOptions = FXCollections.observableArrayList("номеру","названию", "количеству", "производителю");
         choiceBoxForProducts.setItems(productOptions);
         choiceBoxForProducts.setValue("по названию");
 
@@ -145,7 +145,7 @@ public class AdminController {
             labelNotFound.setVisible(false);
             if(dataSearching.getText().equals("")) {
                 labelNotFound.setVisible(false);
-                labelInfo.setText("the empty field");
+                labelInfo.setText("поле на заполнено");
                 labelInfo.setVisible(true);
             } else {
                 labelNotFound.setVisible(false);
@@ -230,11 +230,11 @@ public class AdminController {
         });
 
         buttonEditProd.setOnAction(event -> {
-            MainController.createNewStage("editProduct.fxml");
+            MainController.createNewStage("../views/editProduct.fxml");
         });
 
         buttonDeleteProd.setOnAction(event -> {
-            MainController.createNewStage("delProduct.fxml");
+            MainController.createNewStage("../views/delProduct.fxml");
         });
 
         buttonOrderProcessing.setOnAction(event-> {

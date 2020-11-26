@@ -1,5 +1,6 @@
 package sample;
 
+import entities.Manufacturer;
 import entities.Order;
 import entities.Product;
 import entities.User;
@@ -102,9 +103,21 @@ public class ClientSocket extends Application {
     }
 
     public static ArrayList<Product> getListProducts() throws Exception {
-        objectOutputStream.writeObject("product/getList");
 
+        objectOutputStream.writeObject("product/getList");
         ArrayList<Product> list = (ArrayList<Product>) objectInputStream.readObject();
+        return list;
+    }
+
+    public static ArrayList<Manufacturer> getListManufacturers() {
+
+        ArrayList<Manufacturer> list = null;
+        try {
+            objectOutputStream.writeObject("manufacturer/getList");
+             list = (ArrayList<Manufacturer>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 
@@ -113,7 +126,6 @@ public class ClientSocket extends Application {
         objectOutputStream.writeObject("getListProductsForSearching/" + option + "/" + data);
         ArrayList<Product> list = (ArrayList<Product>) objectInputStream.readObject();
         return list;
-
     }
 
     public static ArrayList<Order> getListOrders() throws Exception {
@@ -148,7 +160,7 @@ public class ClientSocket extends Application {
 
         objectOutputStream.writeObject("add/product");
 
-        Product pr = new Product(0, prod_name, price, amount,0);
+        Product pr = new Product(0, prod_name, amount,  price,0);
         objectOutputStream.writeObject(pr);
 
         String answer = (String) objectInputStream.readObject();
@@ -156,18 +168,70 @@ public class ClientSocket extends Application {
         return answer;
     }
 
+    public static String addProduct(Product product) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("product/add");
+            objectOutputStream.writeObject(product);
+
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println("Add Product: " + answer);
+        return answer;
+    }
+
+    public static Product getProductById(int id) {
+        Product product = null;
+        try {
+            objectOutputStream.writeObject("product/get");
+            objectOutputStream.writeObject(id);
+            product = (Product) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
+    public static String setProductById(Product product) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("product/set");
+            objectOutputStream.writeObject(product);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
     public static String editProduct( int id, String name, double price, int amount) throws Exception {
 
         objectOutputStream.writeObject("edit/product");
 
-        Product pr = new Product(id, name, price, amount, 0);
+        Product pr = new Product(id, name,  amount, price, 0);
         objectOutputStream.writeObject(pr);
 
         String answer = (String) objectInputStream.readObject();
         System.out.println("Edit Product: " + answer);
         return answer;
     }
-    public static String delProduct(int id) throws Exception {
+
+    public static String delProduct(int id) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("product/del");
+            objectOutputStream.writeObject(id);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
+   /* public static String delProduct(int id) throws Exception {
 
         objectOutputStream.writeObject("del/product");
 
@@ -177,7 +241,7 @@ public class ClientSocket extends Application {
         String answer = (String) objectInputStream.readObject();
         System.out.println("Del Product: " + answer);
         return answer;
-    }
+    }*/
 
     public static Double getPrice(String prod_name) throws Exception {
         objectOutputStream.writeObject("getPrice/" + prod_name);

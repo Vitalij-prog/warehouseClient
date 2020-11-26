@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="320.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditProductController">
+   <children>
+      <Label layoutX="152.0" layoutY="25.0" text="Редактирование товара">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="id" layoutX="176.0" layoutY="71.0" prefHeight="25.0" prefWidth="85.0" />
+      <TextField fx:id="name" disable="true" layoutX="176.0" layoutY="111.0" />
+      <TextField fx:id="amount" disable="true" layoutX="176.0" layoutY="150.0" />
+      <TextField fx:id="price" disable="true" layoutX="176.0" layoutY="193.0" />
+      <Button fx:id="updateButton" disable="true" layoutX="210.0" layoutY="259.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Обновить" />
+      <Button fx:id="findButton" layoutX="275.0" layoutY="71.0" mnemonicParsing="false" text="Найти" />
+      <Label layoutX="67.0" layoutY="75.0" prefHeight="17.0" prefWidth="81.0" text="Номер товара:" AnchorPane.rightAnchor="352.0" />
+      <Label fx:id="findMessage" layoutX="357.0" layoutY="75.0" prefHeight="17.0" prefWidth="117.0" text="товар не найден" textFill="#e81a1a" visible="false" />
+      <Label layoutX="51.0" layoutY="115.0" text="Название товара:" />
+      <Label layoutX="28.0" layoutY="154.0" text="Количество на складе:" />
+      <Label layoutX="80.0" layoutY="197.0" text="Цена товара:" />
+      <Label fx:id="updateMessage" layoutX="170.0" layoutY="232.0" text="данные успешно обновлены" textFill="#0dd054" visible="false" />
+      <Label fx:id="incorrectNameMessage" layoutX="357.0" layoutY="115.0" prefHeight="17.0" prefWidth="117.0" text="некорректный ввод" textFill="#e81a1a" visible="false" />
+      <Label fx:id="incorrectAmountMessage" layoutX="357.0" layoutY="154.0" prefHeight="17.0" prefWidth="117.0" text="некорректный ввод" textFill="#e81a1a" visible="false" />
+      <Label fx:id="incorrectPriceMessage" layoutX="357.0" layoutY="197.0" prefHeight="17.0" prefWidth="117.0" text="некорректный ввод" textFill="#e81a1a" visible="false" />
+   </children>
+</AnchorPane>

@@ -13,14 +13,14 @@
       <TextField fx:id="productAmount" layoutX="131.0" layoutY="125.0" />
       <TextField fx:id="productPrice" layoutX="131.0" layoutY="175.0" />
       <ChoiceBox fx:id="manufacturersChoiceBox"  layoutX="356.0" layoutY="71.0" prefWidth="150.0" />
-      <Button layoutX="274.0" layoutY="287.0" mnemonicParsing="false" text="Добавить" />
+      <Button fx:id="addButton" layoutX="274.0" layoutY="287.0" mnemonicParsing="false" text="Добавить" />
       <Label layoutX="24.0" layoutY="75.0" text="название товара:" />
       <Label layoutX="14.0" layoutY="129.0" text="количество товара:" />
       <Label layoutX="49.0" layoutY="179.0" text="цена товара:" />
       <Label layoutX="398.0" layoutY="41.0" text="производитель:" />
-      <Label layoutX="151.0" layoutY="215.0" text="некорректный ввод" textFill="#d30b0b" visible="false" />
-      <Label layoutX="231.0" layoutY="254.0" text="товар успешно добавлен" textFill="#18e40a" visible="false" />
+      <Label fx:id="incorrectInputLabel" layoutX="151.0" layoutY="215.0" text="некорректный ввод" textFill="#d30b0b" visible="false" />
+      <Label fx:id="completeMessage" layoutX="231.0" layoutY="254.0" text="товар успешно добавлен" textFill="#18e40a" visible="false" />
       <Label layoutX="410.0" layoutY="129.0" text="тип товара:" />
-      <Label layoutX="393.0" layoutY="167.0" text="тут будет тип товара" />
+      <Label fx:id="productTypeLabel" layoutX="393.0" layoutY="167.0" text="тут будет тип товара" />
    </children>
 </AnchorPane>

@@ -26,4 +26,10 @@ public class Manufacturer implements Serializable {
     public String getProductsType() {
         return productsType;
     }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
+
 }
