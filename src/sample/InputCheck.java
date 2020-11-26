@@ -48,14 +48,13 @@ public class InputCheck {
     public static boolean checkChoiceForSearchingProducts(String option, String data) {
         boolean res = true;
         switch(option) {
-            case "product_name":
-                res = isCorrectString(data,LENGTH_PRODUCT_NAME);
-                break;
-            case "product_price":
-                res = isDouble(data);
-                break;
-            case "amount":
+            case "номеру":
+            case "количеству":
                 res = isInteger(data);
+                break;
+            case "названию":
+            case "производителю":
+                res = isCorrectString(data,LENGTH_PRODUCT_NAME);
                 break;
         }
         return res;

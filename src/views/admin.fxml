@@ -42,7 +42,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="textForProductsSearching" layoutX="160.0" layoutY="372.0" prefHeight="31.0" prefWidth="159.0" promptText="data for searching" />
+                        <TextField fx:id="textForProductsSearching" layoutX="160.0" layoutY="372.0" prefHeight="31.0" prefWidth="159.0" promptText="данные для поиска" />
                         <Label layoutX="89.0" layoutY="332.0" text="поиск по" />
                         <Label layoutX="36.0" layoutY="379.0" text="данные для поиска" />
                     </children></AnchorPane>

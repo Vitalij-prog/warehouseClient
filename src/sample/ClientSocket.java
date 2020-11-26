@@ -121,10 +121,16 @@ public class ClientSocket extends Application {
         return list;
     }
 
-    public static ArrayList<Product> getListProducts(String option, String data) throws Exception {
-
-        objectOutputStream.writeObject("getListProductsForSearching/" + option + "/" + data);
-        ArrayList<Product> list = (ArrayList<Product>) objectInputStream.readObject();
+    public static ArrayList<Product> searchProducts(String condition, String data) {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            objectOutputStream.writeObject("product/search");
+            objectOutputStream.writeObject(condition);
+            objectOutputStream.writeObject(data);
+            list = (ArrayList<Product>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 

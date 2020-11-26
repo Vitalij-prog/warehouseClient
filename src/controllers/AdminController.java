@@ -278,7 +278,7 @@ public class AdminController {
                 if(checkChoiceForSearchingProducts(choiceBoxForProducts.getValue(),textForProductsSearching.getText())) {
                     ArrayList<Product> list = null;
                     try {
-                        list = getListProducts(choiceBoxForProducts.getValue(), textForProductsSearching.getText());
+                        list = searchProducts(choiceBoxForProducts.getValue(), textForProductsSearching.getText());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -294,6 +294,7 @@ public class AdminController {
                         prodCol_4.setCellValueFactory(new PropertyValueFactory<Product, Integer>("amount"));
                         prodCol_5.setCellValueFactory(new PropertyValueFactory<Product, String>("type"));
                         prodCol_6.setCellValueFactory(new PropertyValueFactory<Product, String>("manufacturer"));
+                        prodTableView.setItems(products);
                     } else {
                         labelSearchProductsInfo.setText("данные не найдены");
                         labelSearchProductsInfo.setVisible(true);
