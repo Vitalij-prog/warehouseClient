@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import static sample.ClientSocket.delProduct;
+import static sample.ClientSocket.del;
 import static sample.InputCheck.isInteger;
 
 public class DelProductController {
@@ -27,7 +27,7 @@ public class DelProductController {
             String id = this.id.getText();
             if(!id.equals("")) {
                 if(isInteger(id)) {
-                    String answer = delProduct(Integer.parseInt(id));
+                    String answer = del(Integer.parseInt(id), "product");
                     if(answer.equals("success")) {
                         delMessage.setVisible(true);
                     } else {

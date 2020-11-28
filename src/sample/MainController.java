@@ -71,6 +71,26 @@ public abstract class MainController {
         stage.showAndWait();
 
     }
+
+    public static void createNewStage(String path, Button parentButton) {
+        Stage primaryStage = (Stage) parentButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainController.class.getResource(path));
+
+        try{
+            loader.load();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Parent main = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(main));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(primaryStage);
+        stage.showAndWait();
+
+    }
     /*public static String getUserNameFromController(String fileName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainController.class.getResource(fileName));

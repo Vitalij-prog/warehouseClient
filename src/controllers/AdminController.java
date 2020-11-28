@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.Manufacturer;
 import entities.Order;
 import entities.Product;
 import entities.User;
@@ -94,49 +95,80 @@ public class AdminController {
     private Label labelNotFound;
     //-----------------------------------------------------
     @FXML
-    private Button buttonShowUsers;
+    private Button showUsersButton;
     @FXML
-    private Button buttonAddUser;
+    private Button addUserButton;
     @FXML
-    private Button buttonDeleteUser;
+    private Button deleteUserButton;
     @FXML
-    private TextField textUserId;
+    private Button searchUsersButton;
     @FXML
-    private TextField textUserLogin;
+    private Button blockUserButton;
     @FXML
-    private TextField textUserPassword;
+    private TextField nameTextField;
     @FXML
-    private Label labelExist;
+    private TextField passwordTextField;
     @FXML
-    private Label labelAddUserSuccess;
+    private TextField dataUserSearchTextField;
     @FXML
-    private Label labelUserDeleted;
+    private Label takenNameMessage;
     @FXML
-    private Label labelUserIdNotFound;
+    private Label addUserSuccessMessage;
+    @FXML
+    private Label userNotFoundMessage;
+    @FXML
+    private Label emptyFieldsMessage;
+
+    @FXML
+    private ChoiceBox<String> choiceForUsersSearching;
     @FXML
     private ChoiceBox<String> choiceBoxUserRole;
     @FXML
-    private TableView<User> tableUsers;
+    private TableView<User> usersTableView;
     @FXML
-    private TableColumn<User,Integer> col_userId;
+    private TableColumn<User,Integer> usersColId;
     @FXML
-    private TableColumn<User, String> col_usName;
+    private TableColumn<User, String>  usersColName;
     @FXML
-    private TableColumn<User, String> col_userRole;
+    private TableColumn<User, String> usersColRole;
+    @FXML
+    private TableColumn<User, String> usersColStatus;
+    //-----------------------------------------------------
+    @FXML
+    private TableView<Manufacturer> manufacturersTableView;
+    @FXML
+    private TableColumn<Manufacturer, Integer> manufacturersColId;
+    @FXML
+    private TableColumn<Manufacturer, String> manufacturersColName;
+    @FXML
+    private TableColumn<Manufacturer, String> manufacturersColProdType;
+
+    @FXML
+    private Button viewManufacturersButton;
+    @FXML
+    private Button addManufacturersButton;
+    @FXML
+    private Button editManufacturersButton;
+    @FXML
+    private Button delManufacturersButton;
 
     @FXML
     void initialize() {
-        ObservableList<String>  orderOptions = FXCollections.observableArrayList("product_name", "user_name","price", "date");
+        ObservableList<String>  orderOptions = FXCollections.observableArrayList("номер", "имя пользователя","название товара", "дата заказа");
         choiceBoxForSearching.setItems(orderOptions);
         choiceBoxForSearching.setValue("product_name");
 
         ObservableList<String>  productOptions = FXCollections.observableArrayList("номеру","названию", "количеству", "производителю");
         choiceBoxForProducts.setItems(productOptions);
-        choiceBoxForProducts.setValue("по названию");
+        choiceBoxForProducts.setValue("названию");
 
-        ObservableList<String>  userRole = FXCollections.observableArrayList("user", "admin");
+        ObservableList<String>  userOptions = FXCollections.observableArrayList("номеру", "имени", "роли", "статусу");
+        choiceForUsersSearching.setItems(userOptions);
+        choiceForUsersSearching.setValue("имени");
+
+        ObservableList<String>  userRole = FXCollections.observableArrayList("admin", "client", "provider");
         choiceBoxUserRole.setItems(userRole);
-        choiceBoxUserRole.setValue("user");
+        choiceBoxUserRole.setValue("client");
 
         choiceBoxForSearching.setOnAction(event -> choiceBoxForSearching.setValue(choiceBoxForSearching.getValue()));
 
@@ -305,8 +337,8 @@ public class AdminController {
                 }
             }
         });
-
-        buttonShowUsers.setOnAction(event -> {
+        //--------------------------------------------------------------
+        showUsersButton.setOnAction(event -> {
             ArrayList<User> list = null;
             try {
                 list = getListUsers();
@@ -319,17 +351,17 @@ public class AdminController {
             if(list.size() != 0) {
                 users.setAll(list);
 
-                col_userId.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
-                col_usName.setCellValueFactory(new PropertyValueFactory<User, String>("user_name"));
-                col_userRole.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
-
-                tableUsers.setItems(users);
+                usersColId.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
+                usersColName.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
+                usersColRole.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
+                usersColStatus.setCellValueFactory(new PropertyValueFactory<User,String>("status"));
+                usersTableView.setItems(users);
             }
         });
 
-        buttonDeleteUser.setOnAction(event -> {
+        deleteUserButton.setOnAction(event -> {
             String answer = "";
-            labelUserDeleted.setVisible(false);
+            /*labelUserDeleted.setVisible(false);
             if(textUserId.getText().equals("")) {
                 labelUserIdNotFound.setText("the field is empty");
                 labelUserIdNotFound.setVisible(true);
@@ -352,22 +384,22 @@ public class AdminController {
                     labelUserIdNotFound.setText("incorrect input");
                     labelUserIdNotFound.setVisible(true);
                 }
-            }
+            }*/
         });
 
-        buttonAddUser.setOnAction(event -> {
+        addUserButton.setOnAction(event -> {
             String answer = "";
-            labelExist.setVisible(false);
-            labelAddUserSuccess.setVisible(false);
-            if(textUserLogin.getText().equals("") || textUserPassword.getText().equals("")) {
-                labelExist.setText("there is empty field");
-                labelExist.setVisible(true);
+            takenNameMessage.setVisible(false);
+            addUserSuccessMessage.setVisible(false);
+            emptyFieldsMessage.setVisible(false);
+            if(nameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
+                emptyFieldsMessage.setText("поля не заполнены");
+                emptyFieldsMessage.setVisible(true);
             } else {
-                labelExist.setVisible(false);
-                if(isCorrectString(textUserLogin.getText(), LENGTH_USER_NAME) && isCorrectString(textUserPassword.getText(), LENGTH_USER_PASSWORD)) {
+                if(isCorrectString(nameTextField.getText(), LENGTH_USER_NAME) && isCorrectString(passwordTextField.getText(), LENGTH_USER_PASSWORD)) {
 
-                    String login = textUserLogin.getText();
-                    String password = textUserPassword.getText();
+                    String login = nameTextField.getText();
+                    String password = passwordTextField.getText();
                     String role = choiceBoxUserRole.getValue();
                     User user = new User(0, login, password, role, "");
                     try {
@@ -376,21 +408,79 @@ public class AdminController {
                         e.printStackTrace();
                     }
                     if (answer.equals("success")) {
-                        labelAddUserSuccess.setVisible(true);
+                        addUserSuccessMessage.setVisible(true);
                     } else {
-                        labelExist.setText("this login already exist");
-                        labelExist.setVisible(true);
+                        takenNameMessage.setText("это имя уже занято");
+                        takenNameMessage.setVisible(true);
                     }
                 } else {
-                    labelExist.setText("incorrect input");
-                    labelExist.setVisible(true);
+                    takenNameMessage.setText("некорректный ввод");
+                    takenNameMessage.setVisible(true);
                 }
             }
+        });
+        searchUsersButton.setOnAction(event -> {
+            userNotFoundMessage.setVisible(false);
+            if(dataUserSearchTextField.getText().equals("")) {
 
+                userNotFoundMessage.setText("поле не заполнено");
+                userNotFoundMessage.setVisible(true);
+            } else {
+                if(checkChoiceForSearchingUsers(choiceForUsersSearching.getValue(),dataUserSearchTextField.getText())) {
+                    ArrayList<User> list = null;
+                    try {
+                        list = searchUsers(choiceForUsersSearching.getValue(), dataUserSearchTextField.getText());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    ObservableList<User> users = FXCollections.observableArrayList();
+
+                    if (list.size() != 0) {
+                        users.setAll(list);
+                        usersColId.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
+                        usersColName.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
+                        usersColRole.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
+                        usersColStatus.setCellValueFactory(new PropertyValueFactory<User,String>("status"));
+                        usersTableView.setItems(users);
+                    } else {
+                        userNotFoundMessage.setText("данные не найдены");
+                        userNotFoundMessage.setVisible(true);
+                    }
+                } else {
+                    userNotFoundMessage.setText("некорректный ввод");
+                    userNotFoundMessage.setVisible(true);
+                }
+            }
+        });
+
+        //--------------------------------------------------------------
+        viewManufacturersButton.setOnAction(event -> {
+            ArrayList<Manufacturer> list = null;
+
+            list = getListManufacturers();
+            ObservableList<Manufacturer> manufacturers = FXCollections.observableArrayList();
+
+            if(list.size() != 0) {
+                manufacturers.setAll(list);
+
+                manufacturersColId.setCellValueFactory(new PropertyValueFactory<Manufacturer, Integer>("id"));
+                manufacturersColName.setCellValueFactory(new PropertyValueFactory<Manufacturer, String>("name"));
+                manufacturersColProdType.setCellValueFactory(new PropertyValueFactory<Manufacturer, String>("productsType"));
+
+                manufacturersTableView.setItems(manufacturers);
+            }
+        });
+
+        addManufacturersButton.setOnAction(event -> {
+            MainController.createNewStage("../views/manufacturer/addManufacturer.fxml");
+        });
+
+        delManufacturersButton.setOnAction(event -> {
+            MainController.createNewStage("../views/manufacturer/delManufacturer.fxml");
+        });
+        editManufacturersButton.setOnAction(event -> {
+            MainController.createNewStage("../views/manufacturer/editManufacturer.fxml");
         });
     }
-
-
-
-
 }

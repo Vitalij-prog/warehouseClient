@@ -9,6 +9,7 @@ public class InputCheck {
     public static final int LENGTH_PRODUCT_NAME = 30;
     public static final int LENGTH_USER_NAME = 30;
     public static final int LENGTH_USER_PASSWORD = 30;
+    public static final int LENGTH_ROLE = 10;
     public static boolean isCorrectString(String str, int correct_size) {
         if(str.length() <= correct_size) {
             return true;
@@ -59,7 +60,22 @@ public class InputCheck {
         }
         return res;
     }
-
+    public static boolean checkChoiceForSearchingUsers(String option, String data) {
+        boolean res = true;
+        switch(option) {
+            case "номеру":
+                res = isInteger(data);
+                break;
+            case "имени":
+                res = isCorrectString(data,LENGTH_PRODUCT_NAME);
+                break;
+            case "роли":
+            case "статусу":
+                res = isCorrectString(data,LENGTH_ROLE);
+                break;
+        }
+        return res;
+    }
     public static boolean checkChoiceForSearchingOrders(String option, String data) {
         boolean res = true;
         switch(option) {

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -11,8 +16,77 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
     <tabs>
+      <Tab text="Профиль">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="67.0" layoutY="42.0" text="смена имени, пароля " />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+        <Tab text="пользователи">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <TableView fx:id="usersTableView" layoutX="322.0" layoutY="68.0" prefHeight="370.0" prefWidth="352.0">
+                            <columns>
+                                <TableColumn fx:id="usersColId" prefWidth="59.0" text="номер" />
+                                <TableColumn fx:id="usersColName" prefWidth="142.0" text="имя" />
+                                <TableColumn fx:id="usersColRole" prefWidth="64.0" text="роль" />
+                                <TableColumn fx:id="usersColStatus" prefWidth="86.0" text="статус" />
+                            </columns>
+                        </TableView>
+                        <Button fx:id="showUsersButton" layoutX="322.0" layoutY="17.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="84.0" text="Просмотр" />
+                        <Button fx:id="addUserButton" layoutX="176.0" layoutY="176.0" mnemonicParsing="false" text="Добавить" />
+                        <Label layoutX="36.0" layoutY="20.0" text="Добавление нового пользователя">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                        <TextField fx:id="nameTextField" layoutX="78.0" layoutY="60.0" prefHeight="25.0" prefWidth="167.0" />
+                        <TextField fx:id="passwordTextField" layoutX="78.0" layoutY="120.0" prefHeight="25.0" prefWidth="165.0" />
+                        <Label layoutX="36.0" layoutY="64.0" text="Имя:" />
+                        <Label layoutX="16.0" layoutY="124.0" text="Пароль:" />
+                        <Label fx:id="takenNameMessage" layoutX="119.0" layoutY="93.0" text="имя уже занято" textFill="#dd0d0d" visible="false" />
+                        <Label fx:id="addUserSuccessMessage" layoutX="62.0" layoutY="219.0" text="пользователь успешно добавлен" textFill="#2ee40a" visible="false" />
+                  <Button fx:id="deleteUserButton" layoutX="605.0" layoutY="17.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="69.0" text="Удаление" />
+                        <ChoiceBox fx:id="choiceBoxUserRole" layoutX="79.0" layoutY="176.0" prefHeight="25.0" prefWidth="88.0" />
+                        <Label layoutX="36.0" layoutY="180.0" text="Роль:" />
+                        <Label fx:id="emptyFieldsMessage" layoutX="98.0" layoutY="153.0" text="не все поля заполнены" textFill="#e81515" visible="false" />
+                  <ChoiceBox fx:id="choiceForUsersSearching" layoutX="123.0" layoutY="303.0" prefHeight="25.0" prefWidth="124.0" />
+                  <Label layoutX="85.0" layoutY="266.0" text="Поиск пользователей">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="38.0" layoutY="307.0" text="Поиск по:" />
+                  <TextField fx:id="dataUserSearchTextField" layoutX="123.0" layoutY="345.0" prefHeight="25.0" prefWidth="124.0" />
+                  <Label layoutX="63.0" layoutY="349.0" text="Ввод:" />
+                  <Button fx:id="searchUsersButton" layoutX="156.0" layoutY="405.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="Поиск" />
+                  <Label fx:id="userNotFoundMessage" layoutX="131.0" layoutY="378.0" text="данные не найдены" textFill="#e11919" visible="false" />
+
+                    </children></AnchorPane>
+            </content>
+        </Tab>
+      <Tab text="производители">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="manufacturersTableView" layoutX="24.0" layoutY="24.0" prefHeight="243.0" prefWidth="469.0">
+                    <columns>
+                      <TableColumn fx:id="manufacturersColId" prefWidth="65.0" text="номер" />
+                      <TableColumn fx:id="manufacturersColName" prefWidth="207.0" text="наименование производителя" />
+                      <TableColumn fx:id="manufacturersColProdType" prefWidth="200.0" text="тип производимой продукции" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="viewManufacturersButton" layoutX="568.0" layoutY="24.0" mnemonicParsing="false" text="Просмотр" />
+                  <Button fx:id="addManufacturersButton" layoutX="568.0" layoutY="75.0" mnemonicParsing="false" text="Добавление" />
+                  <Button fx:id="editManufacturersButton" layoutX="571.0" layoutY="133.0" mnemonicParsing="false" text="Изменение" />
+                  <Button fx:id="delManufacturersButton" layoutX="570.0" layoutY="186.0" mnemonicParsing="false" text="удаление" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
         <Tab text="товары">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="535.0">
@@ -52,74 +126,111 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <TableView fx:id="ordersTableView" layoutX="22.0" layoutY="14.0" prefHeight="253.0" prefWidth="644.0">
+                        <TableView fx:id="ordersTableView" layoutX="22.0" layoutY="14.0" prefHeight="253.0" prefWidth="647.0">
                             <columns>
-                                <TableColumn fx:id="col_id" prefWidth="75.0" text="id" />
-                                <TableColumn fx:id="col_prodName" prefWidth="75.0" text="prod_name" />
-                                <TableColumn fx:id="col_userName" prefWidth="75.0" text="user_name" />
-                                <TableColumn fx:id="col_price" prefWidth="75.0" text="price" />
-                                <TableColumn fx:id="col_amount" prefWidth="75.0" text="amount" />
-                                <TableColumn fx:id="col_date" prefWidth="75.0" text="date" />
-                                <TableColumn fx:id="col_time" prefWidth="75.0" text="time" />
-                                <TableColumn fx:id="col_status" prefWidth="93.0" text="status" />
+                                <TableColumn fx:id="col_id" prefWidth="61.0" text="номер" />
+                                <TableColumn fx:id="col_prodName" prefWidth="113.0" text="название товара" />
+                                <TableColumn fx:id="col_userName" prefWidth="97.0" text="пользователь" />
+                                <TableColumn fx:id="col_price" prefWidth="60.0" text="сумма заказа" />
+                                <TableColumn fx:id="col_amount" prefWidth="82.0" text="количество" />
+                                <TableColumn fx:id="col_date" prefWidth="62.0" text="дата" />
+                                <TableColumn fx:id="col_time" prefWidth="72.0" text="время" />
+                                <TableColumn fx:id="col_status" prefWidth="95.0" text="статус заказа" />
                             </columns>
                         </TableView>
-                        <Button fx:id="buttonShowOrders" layoutX="22.0" layoutY="286.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="62.0" text="show" />
-                        <Button fx:id="buttonOrderProcessing" layoutX="514.0" layoutY="295.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" text="Order Processing" />
-                        <Label layoutX="114.0" layoutY="292.0" text="search by">
+                        <Button fx:id="buttonShowOrders" layoutX="22.0" layoutY="286.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="78.0" text="Просмотр" />
+                        <Button fx:id="buttonOrderProcessing" layoutX="514.0" layoutY="295.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" text="Обработка заказа" />
+                        <Label layoutX="114.0" layoutY="292.0" text="поиск по">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
                         <ChoiceBox fx:id="choiceBoxForSearching" layoutX="181.0" layoutY="290.0" prefHeight="29.0" prefWidth="113.0" />
-                        <TextField fx:id="dataSearching" layoutX="181.0" layoutY="334.0" prefHeight="29.0" prefWidth="146.0" promptText="data" />
-                        <Button fx:id="buttonSearch" layoutX="181.0" layoutY="376.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="63.0" text="search" />
-                        <Label layoutX="118.0" layoutY="340.0" prefHeight="17.0" prefWidth="63.0" text="input data" />
+                        <TextField fx:id="dataSearching" layoutX="181.0" layoutY="334.0" prefHeight="29.0" prefWidth="146.0" />
+                        <Button fx:id="buttonSearch" layoutX="181.0" layoutY="376.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="63.0" text="Поиск" />
+                        <Label layoutX="64.0" layoutY="340.0" prefHeight="17.0" prefWidth="107.0" text="данные для поиска" />
                         <Label fx:id="labelInfo" layoutX="344.0" layoutY="340.0" text="incorrect input" textFill="#dd0707" visible="false" />
                         <Label fx:id="labelNotFound" layoutX="344.0" layoutY="382.0" text="data not found" textFill="#ee0c0c" visible="false" />
                     </children></AnchorPane>
             </content>
         </Tab>
-        <Tab text="пользователи">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <children>
-                        <TableView fx:id="tableUsers" layoutX="298.0" layoutY="23.0" prefHeight="388.0" prefWidth="352.0">
-                            <columns>
-                                <TableColumn fx:id="col_userId" prefWidth="75.0" text="id" />
-                                <TableColumn fx:id="col_usName" prefWidth="161.0" text="login" />
-                                <TableColumn fx:id="col_userRole" prefWidth="114.0" text="role" />
-                            </columns>
-                        </TableView>
-                        <Button fx:id="buttonShowUsers" layoutX="38.0" layoutY="40.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="54.0" text="Show" />
-                        <Button fx:id="buttonDeleteUser" layoutX="175.0" layoutY="147.0" mnemonicParsing="false" text="Delete" />
-                        <Button fx:id="buttonAddUser" layoutX="191.0" layoutY="329.0" mnemonicParsing="false" text="Add" />
-                        <TextField fx:id="textUserId" layoutX="109.0" layoutY="147.0" prefHeight="25.0" prefWidth="45.0" promptText="id" />
-                        <Label layoutX="102.0" layoutY="115.0" text="Delete user" />
-                        <Label layoutX="30.0" layoutY="151.0" text="input user id" />
-                        <Label layoutX="104.0" layoutY="209.0" text="Add user" />
-                        <Label layoutX="38.0" layoutY="243.0" />
-                        <TextField fx:id="textUserLogin" layoutX="80.0" layoutY="239.0" />
-                        <TextField fx:id="textUserPassword" layoutX="80.0" layoutY="290.0" />
-                        <Label layoutX="38.0" layoutY="243.0" text="login" />
-                        <Label layoutX="14.0" layoutY="294.0" text="password" />
-                        <Label fx:id="labelExist" layoutX="104.0" layoutY="270.0" text="login already exist" textFill="#dd0d0d" visible="false" />
-                        <Label fx:id="labelAddUserSuccess" layoutX="132.0" layoutY="367.0" text="success" textFill="#2ee40a" visible="false" />
-                        <Label fx:id="labelUserIdNotFound" layoutX="95.0" layoutY="180.0" text="id not found" textFill="#ee0808" visible="false" />
-                        <Label fx:id="labelUserDeleted" layoutX="168.0" layoutY="180.0" text="user deleted" textFill="#1ada24" visible="false" />
-                        <ChoiceBox fx:id="choiceBoxUserRole" layoutX="80.0" layoutY="329.0" prefHeight="25.0" prefWidth="87.0" />
-                        <Label layoutX="40.0" layoutY="333.0" prefHeight="17.0" prefWidth="23.0" text="role" />
-                    </children></AnchorPane>
-            </content>
-        </Tab>
       <Tab text="поставки">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="suppliesTableView" layoutX="11.0" layoutY="14.0" prefHeight="323.0" prefWidth="681.0">
+                    <columns>
+                      <TableColumn fx:id="supplyColId" prefWidth="75.0" text="номер" />
+                      <TableColumn fx:id="supplyColUserName" prefWidth="75.0" text="пользователь" />
+                        <TableColumn fx:id="supplyColProdName" prefWidth="75.0" text="название товара" />
+                        <TableColumn fx:id="supplyColProdPrice" prefWidth="75.0" text="цена" />
+                        <TableColumn fx:id="supplyColProdAmount" prefWidth="75.0" text="количество" />
+                        <TableColumn fx:id="supplyColManufacturers" prefWidth="75.0" text="производитель" />
+                        <TableColumn fx:id="supplyColDate" prefWidth="56.0" text="дата" />
+                        <TableColumn fx:id="supplyColTime" prefWidth="75.0" text="время" />
+                        <TableColumn fx:id="supplyColStatus" prefWidth="75.0" text="статус" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="viewSuppliesButton" layoutX="29.0" layoutY="369.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="81.0" text="Просмотр" />
+                  <Button fx:id="delSuppliesButton" layoutX="259.0" layoutY="370.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="83.0" text="Удаление" />
+                  <Button fx:id="processingSuppliesButton" layoutX="147.0" layoutY="370.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="77.0" text="Обработка" />
+                  <Button fx:id="searchSuppliesButton" layoutX="600.0" layoutY="369.0" mnemonicParsing="false" text="Поиск" />
+                  <ChoiceBox fx:id="searchSuppliesChoiceBox" layoutX="414.0" layoutY="369.0" prefWidth="150.0" />
+                  <TextField fx:id="dataSearchSuppliesTextField" layoutX="414.0" layoutY="406.0" />
+               </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="производители">
+      <Tab text="статистика">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TabPane prefHeight="471.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Untitled Tab 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="700.0">
+                                 <children>
+                                    <LineChart layoutX="28.0" layoutY="14.0" prefHeight="313.0" prefWidth="645.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Untitled Tab 2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <PieChart layoutX="29.0" layoutY="21.0" prefHeight="368.0" prefWidth="482.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="Untitled Tab">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <BarChart layoutX="39.0" layoutY="14.0" prefHeight="346.0" prefWidth="500.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
         </content>
       </Tab>
     </tabs>

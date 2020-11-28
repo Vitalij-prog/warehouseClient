@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.manufacturer.EditManufacturerController">
+   <children>
+      <Label layoutX="47.0" layoutY="24.0" text="Изменение данных о производителе">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="idTextField" layoutX="164.0" layoutY="88.0" prefHeight="25.0" prefWidth="71.0" />
+      <TextField fx:id="nameTextField" disable="true" layoutX="126.0" layoutY="150.0" />
+      <TextField fx:id="prodTypeTextField" disable="true" layoutX="126.0" layoutY="197.0" />
+      <Label layoutX="22.0" layoutY="92.0" text="Номер производителя:" />
+      <Label fx:id="notFoundLabel" layoutX="146.0" layoutY="119.0" text="данные не найдены" textFill="#ea2222" visible="false" />
+      <Label layoutX="77.0" layoutY="154.0" text="Имя:" />
+      <Label layoutX="17.0" layoutY="201.0" text="Тип продукции:" />
+      <Label fx:id="incorrectNameLabel" layoutX="283.0" layoutY="154.0" text="некорректный ввод" textFill="#ea2222" visible="false" />
+      <Label fx:id="incorrectProdTypeLabel" layoutX="283.0" layoutY="201.0" text="некорректный ввод" textFill="#ea2222" visible="false" />
+      <Button fx:id="updateButton" disable="true" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" text="Обновить" />
+      <Label fx:id="successMessage" layoutX="121.0" layoutY="246.0" text="данные успешно обновлены" textFill="#39c92c" visible="false" />
+      <Button fx:id="findButton" layoutX="275.0" layoutY="88.0" mnemonicParsing="false" text="Поиск" />
+   </children>
+</AnchorPane>

@@ -109,18 +109,6 @@ public class ClientSocket extends Application {
         return list;
     }
 
-    public static ArrayList<Manufacturer> getListManufacturers() {
-
-        ArrayList<Manufacturer> list = null;
-        try {
-            objectOutputStream.writeObject("manufacturer/getList");
-             list = (ArrayList<Manufacturer>) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
     public static ArrayList<Product> searchProducts(String condition, String data) {
         ArrayList<Product> list = new ArrayList<>();
         try {
@@ -185,7 +173,6 @@ public class ClientSocket extends Application {
             e.printStackTrace();
         }
 
-        //System.out.println("Add Product: " + answer);
         return answer;
     }
 
@@ -212,8 +199,56 @@ public class ClientSocket extends Application {
         }
         return answer;
     }
+    //-------------------------------------------------------------------------------
+    public static ArrayList<Manufacturer> getListManufacturers() {
 
-    public static String editProduct( int id, String name, double price, int amount) throws Exception {
+        ArrayList<Manufacturer> list = null;
+        try {
+            objectOutputStream.writeObject("manufacturer/getList");
+            list = (ArrayList<Manufacturer>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static String setManufacturerById(Manufacturer manufacturer) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("manufacturer/set");
+            objectOutputStream.writeObject(manufacturer);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+    public static Manufacturer getManufacturerById(int id) {
+        Manufacturer manufacturer = null;
+        try {
+            objectOutputStream.writeObject("manufacturer/get");
+            objectOutputStream.writeObject(id);
+            manufacturer = (Manufacturer) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return manufacturer;
+    }
+
+    public static String addManufacturer(Manufacturer manufacturer) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("manufacturer/add");
+            objectOutputStream.writeObject(manufacturer);
+
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return answer;
+    }
+
+   /* public static String editProduct( int id, String name, double price, int amount) throws Exception {
 
         objectOutputStream.writeObject("edit/product");
 
@@ -223,12 +258,13 @@ public class ClientSocket extends Application {
         String answer = (String) objectInputStream.readObject();
         System.out.println("Edit Product: " + answer);
         return answer;
-    }
+    }*/
 
-    public static String delProduct(int id) {
+    public static String del(int id, String entity) {
         String answer = "";
+        String request = entity + "/del";
         try {
-            objectOutputStream.writeObject("product/del");
+            objectOutputStream.writeObject(request);
             objectOutputStream.writeObject(id);
             answer = (String) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -283,26 +319,38 @@ public class ClientSocket extends Application {
         System.out.println("Update status: " + answer);
         return answer;
     }
-
+    //-------------------------------------------
     public static ArrayList<User> getListUsers() throws Exception {
-        objectOutputStream.writeObject("getListUsers");
+        objectOutputStream.writeObject("user/getList");
 
         ArrayList<User> list = (ArrayList<User>) objectInputStream.readObject();
 
         return list;
     }
 
-    public static String deleteUser(String id) throws Exception {
+   /* public static String delUser(String id) throws Exception {
         objectOutputStream.writeObject("deleteUser/" + id);
+
+        return (String)objectInputStream.readObject();
+    }*/
+
+    public static String addUser(User user) throws Exception {
+        objectOutputStream.writeObject("user/add");
+        objectOutputStream.writeObject(user);
 
         return (String)objectInputStream.readObject();
     }
 
-    public static String addUser(User user) throws Exception {
-        objectOutputStream.writeObject("add/user");
-        objectOutputStream.writeObject(user);
-
-        return (String)objectInputStream.readObject();
-
+    public static ArrayList<User> searchUsers(String condition, String data) {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            objectOutputStream.writeObject("user/search");
+            objectOutputStream.writeObject(condition);
+            objectOutputStream.writeObject(data);
+            list = (ArrayList<User>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

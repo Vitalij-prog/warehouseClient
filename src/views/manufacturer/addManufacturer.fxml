@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.manufacturer.AddManufacturerController">
+   <children>
+      <Label layoutX="85.0" layoutY="24.0" text="Добавление производителя">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameTextField" layoutX="126.0" layoutY="81.0" />
+      <TextField fx:id="prodTypeTextField" layoutX="126.0" layoutY="138.0" />
+      <Label layoutX="91.0" layoutY="85.0" prefHeight="17.0" prefWidth="28.0" text="Имя:" />
+      <Label layoutX="32.0" layoutY="142.0" text="Тип продукции:" />
+      <Button fx:id="addButton" layoutX="157.0" layoutY="221.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Добавить" />
+      <Label fx:id="takenNameLabel" layoutX="303.0" layoutY="85.0" text="имя уже занято" textFill="#e40707" visible="false" />
+      <Label fx:id="emptyFieldLabel" layoutX="136.0" layoutY="171.0" text="не все поля заполнены" textFill="#e40707" visible="false" />
+      <Label fx:id="addSuccessLabel" layoutX="121.0" layoutY="198.0" text="данные успешно добавлены" textFill="#16d723" visible="false" />
+   </children>
+</AnchorPane>
