@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,39 +55,38 @@ public class AuthorizationController {
     private void loginUser(String loginText, String passText) {
 
         labelWrong.setVisible(false);
-        String answer = "";
+        User user = null;
         try{
-            answer = authorization(loginText, passText);
+            user = authorization(loginText, passText);
         }catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Ответ :" + answer);
-       /* if(answer.equals("user")) {
-            ClientSocket.userName = loginText;
-            MainController.display_page("client.fxml", logInButton, loginText);
-        }else if(answer.equals("admin")){
-            ClientSocket.userName = loginText;
-            MainController.display_page("admin.fxml", logInButton, loginText);
-        }else{
-            labelWrong.setText("wrong login or password");
-            labelWrong.setVisible(true);
-        }*/
-        switch(answer) {
-            case "client":
-                ClientSocket.userName = loginText;
-                MainController.display_page("../views/client.fxml", logInButton, loginText);
-                break;
-            case "provider":
+        if(user != null) {
+            if(!user.getStatus().equals("block")) {
+                System.out.println("Ответ :" + user.getRole());
+                ClientSocket.user = user;
+                switch (user.getRole()) {
+                    case "client":
+                        ClientSocket.userName = loginText;
+                        MainController.display_page("../views/client.fxml", logInButton, loginText);
+                        break;
+                    case "provider":
 
-                break;
-            case "admin":
-                ClientSocket.userName = loginText;
-                MainController.display_page("../views/admin.fxml", logInButton, loginText);
-                break;
-            default:
-                labelWrong.setText("неверное имя пользователя или пароль");
+                        break;
+                    case "admin":
+                        ClientSocket.userName = loginText;
+                        MainController.display_page("../views/admin.fxml", logInButton, loginText);
+                        break;
+                }
+            } else {
+                labelWrong.setText("Вам временно ограничен вход в систему");
                 labelWrong.setVisible(true);
+            }
+        } else {
+            labelWrong.setText("неверное имя пользователя или пароль");
+            labelWrong.setVisible(true);
         }
+
     }
 
     @FXML

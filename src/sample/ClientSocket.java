@@ -57,19 +57,19 @@ public class ClientSocket extends Application {
         objectOutputStream.writeObject("ex");
     }
 
-    public static String authorization(String login, String password) throws Exception {
+    public static User authorization(String login, String password) throws Exception {
         String str = "user/login";
         User user = new User(login, password);
         objectOutputStream.writeObject(str);
         objectOutputStream.writeObject(user);
-        String answer = (String) objectInputStream.readObject();
+        user = (User) objectInputStream.readObject();
 /*
         if (answer.equals("user")) {
             System.out.println("Пользователь " + login + " вошел в программу");
         } else if (answer.equals("admin")) {
             System.out.println("Администратор " + login + " вошел в программу");
         }*/
-        return answer;
+        return user;
     }
     public static String registrationByUser(User user) {
         String str = "user/signup";
@@ -352,5 +352,28 @@ public class ClientSocket extends Application {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static String setUserStatusById(User user) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("user/setStatus");
+            objectOutputStream.writeObject(user);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+    public static User getUserById(int id) {
+        User user = null;
+        try {
+            objectOutputStream.writeObject("user/get");
+            objectOutputStream.writeObject(id);
+            user = (User) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

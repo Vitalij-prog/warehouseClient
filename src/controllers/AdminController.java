@@ -482,5 +482,13 @@ public class AdminController {
         editManufacturersButton.setOnAction(event -> {
             MainController.createNewStage("../views/manufacturer/editManufacturer.fxml");
         });
+        //------------------------------------------------------------
+        deleteUserButton.setOnAction(event -> {
+            MainController.createNewStage("../views/user/delUser.fxml", deleteUserButton);
+        });
+
+        blockUserButton.setOnAction(event-> {
+            MainController.createNewStage("../views/user/accessControl.fxml", blockUserButton);
+        });
     }
 }
