@@ -88,7 +88,7 @@ public class ClientSocket extends Application {
         return answer;
     }
 
-    public static String registrationByUser(String login, String password) throws Exception {
+   /* public static String registrationByUser(String login, String password) throws Exception {
         String str = "signup" + "/" + login + "/" + password;
         objectOutputStream.writeObject(str);
         String answer = (String) objectInputStream.readObject();
@@ -100,7 +100,7 @@ public class ClientSocket extends Application {
             System.out.println("user " + login + " already exists");
         }
         return answer;
-    }
+    }*/
 
     public static ArrayList<Product> getListProducts() throws Exception {
 
@@ -122,19 +122,7 @@ public class ClientSocket extends Application {
         return list;
     }
 
-    public static ArrayList<Order> getListOrders() throws Exception {
-        objectOutputStream.writeObject("getListOrders");
 
-        ArrayList<Order> list = (ArrayList<Order>) objectInputStream.readObject();
-
-        //Product pr = (Product) objectInputStream.readObject();
-        //User pr = (User) objectInputStream.readObject();
-        //String str = (String) objectInputStream.readObject();
-        //ArrayList<String> list = (ArrayList<String>) objectInputStream.readObject();
-        // System.out.println();
-        return list;
-
-    }
 
     public static ArrayList<Order> getListOrders(String option, String dataSearching) throws Exception {
         objectOutputStream.writeObject("getListOrdersOfUser/" + option + "/" + dataSearching ); //+ userName for users
@@ -150,7 +138,7 @@ public class ClientSocket extends Application {
 
     }
 
-    public static String addProduct(String prod_name, double price, int amount) throws Exception {
+    /*public static String addProduct(String prod_name, double price, int amount) throws Exception {
 
         objectOutputStream.writeObject("add/product");
 
@@ -160,7 +148,7 @@ public class ClientSocket extends Application {
         String answer = (String) objectInputStream.readObject();
         System.out.println("Add Product: " + answer);
         return answer;
-    }
+    }*/
 
     public static String addProduct(Product product) {
         String answer = "";
@@ -181,6 +169,18 @@ public class ClientSocket extends Application {
         try {
             objectOutputStream.writeObject("product/get");
             objectOutputStream.writeObject(id);
+            product = (Product) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
+    public static Product getProductByName(String name) {
+        Product product = null;
+        try {
+            objectOutputStream.writeObject("product/getByName");
+            objectOutputStream.writeObject(name);
             product = (Product) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -292,18 +292,7 @@ public class ClientSocket extends Application {
         return price;
     }
 
-    public static String addOrder(String prod_name, String user_name, double price, int amount) throws Exception {
 
-        Date date = new Date(Calendar.getInstance().getTime().getTime());
-        Time time = new Time(Calendar.getInstance().getTime().getTime());
-        objectOutputStream.writeObject("add/order");
-        Order or = new Order(0, user_name, prod_name, amount, price, date, time, "");
-        objectOutputStream.writeObject(or);
-
-        String answer = (String) objectInputStream.readObject();
-        System.out.println("Add Product: " + answer);
-        return answer;
-    }
 
     public static String getOrderStatus(String id) throws Exception {
         objectOutputStream.writeObject("getStatus/" + id);
@@ -375,5 +364,41 @@ public class ClientSocket extends Application {
             e.printStackTrace();
         }
         return user;
+    }
+    //-------------------------------------------------------------orders-------------------------------------
+    public static ArrayList<Order> getListOrders() {
+        ArrayList<Order> list = null;
+        try {
+            objectOutputStream.writeObject("order/getList");
+            list = (ArrayList<Order>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ArrayList<Order> getListOrdersByUserId(int userId) {
+        ArrayList<Order> list = null;
+        try {
+            objectOutputStream.writeObject("order/getListByUserId");
+            objectOutputStream.writeObject(userId);
+            list = (ArrayList<Order>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static String addOrder(Order order) {
+
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("order/add");
+            objectOutputStream.writeObject(order);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
     }
 }

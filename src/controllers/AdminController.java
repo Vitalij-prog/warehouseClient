@@ -275,12 +275,10 @@ public class AdminController {
 
         buttonShowOrders.setOnAction(event -> {
             ArrayList<Order> list = null;
-            try {
-                list = getListOrders();
-                //getListProducts();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+            list = getListOrders();
+
+
 
             ObservableList<Order> orders = FXCollections.observableArrayList();
 

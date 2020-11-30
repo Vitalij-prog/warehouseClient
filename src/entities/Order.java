@@ -26,9 +26,19 @@ public class Order implements Serializable {
         this.time = time;
         this.status = status;
     }
-   /* public Order() {
+    public Order(int user_id, int prod_id, int amount, double price, Date date, Time time){
+        this.user_id = user_id;
+        this.prod_id = prod_id;
+        this.amount = amount;
+        this.price = price;
+        this.date = date;
+        this.time = time;
+    }
 
-    }*/
+    @Override
+    public String toString() {
+        return Integer.toString(this.id);
+    }
 
     public int getId() {
         return this.id;
