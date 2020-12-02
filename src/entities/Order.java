@@ -78,4 +78,8 @@ public class Order implements Serializable {
     public int getProd_id() {
         return prod_id;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

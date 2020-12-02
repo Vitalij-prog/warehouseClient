@@ -1,9 +1,6 @@
 package controllers;
 
-import entities.Manufacturer;
-import entities.Order;
-import entities.Product;
-import entities.User;
+import entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.Modality;
+import sample.Main;
 import sample.MainController;
 
 import java.io.IOException;
@@ -93,6 +91,42 @@ public class AdminController {
     private Label labelInfo;
     @FXML
     private Label labelNotFound;
+    //-----------------------------------------------------
+    @FXML
+    private Button showSuppliesButton;
+    @FXML
+    private Button delSuppliesButton;
+    @FXML
+    private Button processingSuppliesButton;
+    @FXML
+    private TableView<Supply> suppliesTableView;
+    @FXML
+    private TableColumn<Supply,Integer> supplyColId;
+    @FXML
+    private TableColumn<Supply, String> supplyColUserName;
+    @FXML
+    private TableColumn<Supply, String> supplyColProdName;
+    @FXML
+    private TableColumn<Supply, Double> supplyColProdPrice;
+    @FXML
+    private TableColumn<Supply,  Integer> supplyColProdAmount;
+    @FXML
+    private TableColumn<Supply, String> supplyColManufacturer;
+    @FXML
+    private TableColumn<Supply, Date> supplyColDate;
+    @FXML
+    private TableColumn<Supply, Time> supplyColTime;
+    @FXML
+    private TableColumn<Supply, String> supplyColStatus;
+    @FXML
+    private Button searchSuppliesButton;
+    @FXML
+    private ChoiceBox<String> searchSuppliesChoiceBox;
+    @FXML
+    private TextField searchSuppliesTextField;
+    @FXML
+    private Label searchSuppliesLabel;
+
     //-----------------------------------------------------
     @FXML
     private Button showUsersButton;
@@ -269,34 +303,8 @@ public class AdminController {
             MainController.createNewStage("../views/delProduct.fxml");
         });
 
-        buttonOrderProcessing.setOnAction(event-> {
-            MainController.createNewStage("order_processing.fxml");
-        });
-
-        buttonShowOrders.setOnAction(event -> {
-            ArrayList<Order> list = null;
-
-            list = getListOrders();
 
 
-
-            ObservableList<Order> orders = FXCollections.observableArrayList();
-
-            if(list != null) {
-                orders.setAll(list);
-            }
-
-            col_id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
-            col_prodName.setCellValueFactory(new PropertyValueFactory<Order, String>("prod_name"));
-            col_userName.setCellValueFactory(new PropertyValueFactory<Order, String>("user_name"));
-            col_price.setCellValueFactory(new PropertyValueFactory<Order, Double>("price"));
-            col_amount.setCellValueFactory(new PropertyValueFactory<Order, Integer>("amount"));
-            col_date.setCellValueFactory(new PropertyValueFactory<Order, Date>("date"));
-            col_time.setCellValueFactory(new PropertyValueFactory<Order, Time>("time"));
-            col_status.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
-
-            ordersTableView.setItems(orders);
-        });
 
         buttonSearchProducts.setOnAction(event -> {
             if(textForProductsSearching.getText().equals("")) {
@@ -488,5 +496,64 @@ public class AdminController {
         blockUserButton.setOnAction(event-> {
             MainController.createNewStage("../views/user/accessControl.fxml", blockUserButton);
         });
+        //-------------------------------------------Orders-----------------
+        buttonShowOrders.setOnAction(event -> {
+            ArrayList<Order> list = null;
+
+            list = getListOrders();
+
+            ObservableList<Order> orders = FXCollections.observableArrayList();
+
+            if(list != null) {
+                orders.setAll(list);
+            }
+
+            col_id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
+            col_prodName.setCellValueFactory(new PropertyValueFactory<Order, String>("prod_name"));
+            col_userName.setCellValueFactory(new PropertyValueFactory<Order, String>("user_name"));
+            col_price.setCellValueFactory(new PropertyValueFactory<Order, Double>("price"));
+            col_amount.setCellValueFactory(new PropertyValueFactory<Order, Integer>("amount"));
+            col_date.setCellValueFactory(new PropertyValueFactory<Order, Date>("date"));
+            col_time.setCellValueFactory(new PropertyValueFactory<Order, Time>("time"));
+            col_status.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
+
+            ordersTableView.setItems(orders);
+        });
+
+        buttonOrderProcessing.setOnAction(event -> {
+            MainController.createNewStage("../views/order/processOrder.fxml", buttonOrderProcessing);
+        });
+
+        //--------------------------------------Supplies----------------------
+
+        showSuppliesButton.setOnAction(event -> {
+            ArrayList<Supply> list = null;
+
+            list = getListSupplies();
+
+            ObservableList<Supply> supplies = FXCollections.observableArrayList();
+
+            if(list != null) {
+                supplies.setAll(list);
+            }
+
+            supplyColId.setCellValueFactory(new PropertyValueFactory<Supply, Integer>("id"));
+            supplyColUserName.setCellValueFactory(new PropertyValueFactory<Supply, String>("providerName"));
+            supplyColProdName.setCellValueFactory(new PropertyValueFactory<Supply, String>("productName"));
+            supplyColProdPrice.setCellValueFactory(new PropertyValueFactory<Supply, Double>("productPrice"));
+            supplyColProdAmount.setCellValueFactory(new PropertyValueFactory<Supply, Integer>("productAmount"));
+            supplyColManufacturer.setCellValueFactory(new PropertyValueFactory<Supply, String>("manufacturerName"));
+            supplyColDate.setCellValueFactory(new PropertyValueFactory<Supply, Date>("date"));
+            supplyColTime.setCellValueFactory(new PropertyValueFactory<Supply, Time>("time"));
+            supplyColStatus.setCellValueFactory(new PropertyValueFactory<Supply, String>("status"));
+
+            suppliesTableView.setItems(supplies);
+        });
+
+        processingSuppliesButton.setOnAction(event -> {
+            MainController.createNewStage("../views/supply/processSupply.fxml", processingSuppliesButton);
+        });
+
+
     }
 }

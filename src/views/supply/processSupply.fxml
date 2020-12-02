@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.supply.ProcessSupplyController">
+    <children>
+        <Label layoutX="26.0" layoutY="24.0" text="Обработка поставок">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="64.0" layoutY="103.0" text="Номер поставки:" />
+        <ChoiceBox fx:id="suppliesChoiceBox" layoutX="192.0" layoutY="99.0" prefHeight="25.0" prefWidth="116.0" />
+        <Label layoutX="93.0" layoutY="142.0" text="Поставщик:" />
+        <Label layoutX="61.0" layoutY="175.0" text="Название товара:" />
+        <Label layoutX="92.0" layoutY="235.0" text="Количество:" />
+        <Label layoutX="122.0" layoutY="276.0" text="Статус:" />
+        <ChoiceBox fx:id="statusChoiceBox" layoutX="192.0" layoutY="272.0" prefHeight="25.0" prefWidth="116.0" />
+        <Button fx:id="updateButton" layoutX="215.0" layoutY="336.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="73.0" text="Обновить" />
+        <Label fx:id="successMessage" layoutX="171.0" layoutY="311.0" text="Данные успешно обновлены" textFill="#26d020" visible="false" />
+        <Label fx:id="providerNameLabel" layoutX="192.0" layoutY="142.0" prefHeight="17.0" prefWidth="132.0" text="имя поставщика" visible="false" />
+        <Label fx:id="prodNameLabel" layoutX="192.0" layoutY="175.0" prefHeight="17.0" prefWidth="132.0" text="название товара" visible="false" />
+        <Label fx:id="amountLabel" layoutX="192.0" layoutY="235.0" text="количество" visible="false" />
+        <Label layoutX="67.0" layoutY="207.0" text="Производитель:" />
+        <Label fx:id="manufacturerLabel" layoutX="192.0" layoutY="207.0" text="имя производителя" visible="false" />
+    </children>
+</AnchorPane>

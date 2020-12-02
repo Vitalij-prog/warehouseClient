@@ -17,6 +17,22 @@ import java.util.ArrayList;
 import static sample.ClientSocket.*;
 
 public class ClientController {
+
+    @FXML
+    private Label userNameLabel;
+    @FXML
+    private Label userRoleLabel;
+    @FXML
+    private Label ordersAmountLabel;
+    @FXML
+    private Label productAmountLabel;
+    @FXML
+    private Label sumLabel;
+    @FXML
+    private Button checkClientInfoButton;
+    @FXML
+    private Button changeClientInfoButton;
+
     @FXML
     private Button showProductsButton;
     @FXML
@@ -68,6 +84,27 @@ public class ClientController {
     @FXML
     public void initialize() {
 
+        userNameLabel.setText(ClientSocket.user.getUserName());
+        userNameLabel.setVisible(true);
+        userRoleLabel.setText(ClientSocket.user.getRole());
+        userRoleLabel.setVisible(true);
+
+        checkClientInfoButton.setOnAction(event -> {
+            String answer = getClientInfoById(ClientSocket.user.getId());
+            String[] values = answer.split("/");
+            ordersAmountLabel.setText(values[0]);
+            productAmountLabel.setText(values[1]);
+            sumLabel.setText(values[2]);
+            ordersAmountLabel.setVisible(true);
+            productAmountLabel.setVisible(true);
+            sumLabel.setVisible(true);
+        });
+
+        changeClientInfoButton.setOnAction(event -> {
+            MainController.createNewStage("../views/user/updateInfo.fxml");
+        });
+
+
         showProductsButton.setOnAction(event -> {
             ArrayList<Product> list = null;
             try {
@@ -104,7 +141,6 @@ public class ClientController {
             }
             ordersColId.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
             ordersColProdName.setCellValueFactory(new PropertyValueFactory<Order, String>("prod_name"));
-            //col_userName.setCellValueFactory(new PropertyValueFactory<Order, String>("user_name"));
             ordersColPrice.setCellValueFactory(new PropertyValueFactory<Order, Double>("price"));
             ordersColAmount.setCellValueFactory(new PropertyValueFactory<Order, Integer>("amount"));
             ordersColDate.setCellValueFactory(new PropertyValueFactory<Order, Date>("date"));
@@ -119,6 +155,8 @@ public class ClientController {
         cancelOrderButton.setOnAction(event -> {
             MainController.createNewStage("../views/order/cancelOrder.fxml", cancelOrderButton);
         });
+
+
 
     }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.supply.AddSupplyController">
+    <children>
+        <Label layoutX="20.0" layoutY="20.0" text="Оформление поставки">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="prodNameTextField" layoutX="209.0" layoutY="96.0" />
+        <Label layoutX="94.0" layoutY="100.0" text="Название товара:" />
+        <Button fx:id="searchProdButton" layoutX="379.0" layoutY="96.0" mnemonicParsing="false" text="Далее" />
+        <Label layoutX="122.0" layoutY="192.0" text="Цена товара:" />
+        <TextField fx:id="prodAmountTextField" disable="true" layoutX="210.0" layoutY="234.0" prefHeight="25.0" prefWidth="82.0" />
+        <Label layoutX="124.0" layoutY="238.0" text="Количество:" />
+        <Label fx:id="infoProdAmountMessage" layoutX="319.0" layoutY="238.0" text="некорретный ввод" textFill="#e41414" visible="false" />
+        <Button fx:id="confirmSupplyButton" disable="true" layoutX="250.0" layoutY="313.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" text="Подтвердить" />
+        <Label fx:id="successSupplyMessage" layoutX="210.0" layoutY="281.0" text="Поставка успешно оформлена" textFill="#26dd20" visible="false" />
+        <Button fx:id="cancelSupplyButton" layoutX="357.0" layoutY="21.0" mnemonicParsing="false" text="Отменить текущее оформление" />
+      <TextField fx:id="prodPriceTextField" disable="true" layoutX="210.0" layoutY="188.0" prefHeight="25.0" prefWidth="82.0" />
+      <Label fx:id="infoProdPriceMessage" layoutX="319.0" layoutY="192.0" text="некорретный ввод" textFill="#e41414" visible="false" />
+      <ChoiceBox fx:id="manufacturersChoiceBox" disable="true" layoutX="209.0" layoutY="141.0" prefWidth="150.0" />
+      <Label layoutX="105.0" layoutY="145.0" text="Производитель:" />
+      <Label fx:id="infoProdNameMessage" layoutX="447.0" layoutY="100.0" text="некорректый ввод" textFill="#e41414" visible="false" />
+    </children>
+</AnchorPane>

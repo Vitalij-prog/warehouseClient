@@ -71,7 +71,7 @@ public class AuthorizationController {
                         MainController.display_page("../views/client.fxml", logInButton, loginText);
                         break;
                     case "provider":
-
+                        MainController.display_page("../views/provider.fxml", logInButton, loginText);
                         break;
                     case "admin":
                         ClientSocket.userName = loginText;

@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.order.ProcessOrderController">
    <children>
       <Label layoutX="26.0" layoutY="24.0" text="Обработка заказа">
@@ -15,18 +14,21 @@
          </font>
       </Label>
       <Label layoutX="79.0" layoutY="103.0" text="Номер заказа:" />
-      <ChoiceBox layoutX="192.0" layoutY="99.0" prefHeight="25.0" prefWidth="116.0" />
+      <ChoiceBox fx:id="ordersChoiceBox" layoutX="192.0" layoutY="99.0" prefHeight="25.0" prefWidth="116.0" />
       <Label layoutX="85.0" layoutY="142.0" text="Имя клиента:" />
       <Label layoutX="61.0" layoutY="175.0" text="Название товара:" />
       <Label layoutX="91.0" layoutY="209.0" text="Количество:" />
       <Label layoutX="83.0" layoutY="243.0" text="Сумма заказа:" />
       <Label layoutX="122.0" layoutY="276.0" text="Статус:" />
-      <ChoiceBox layoutX="192.0" layoutY="272.0" prefHeight="25.0" prefWidth="116.0" />
-      <Button layoutX="215.0" layoutY="336.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="73.0" text="Обновить" />
-      <Label layoutX="171.0" layoutY="311.0" text="Данные успешно обновлены" textFill="#26d020" visible="false" />
-      <Label layoutX="192.0" layoutY="142.0" prefHeight="17.0" prefWidth="132.0" text="имя клиента" />
-      <Label layoutX="192.0" layoutY="175.0" prefHeight="17.0" prefWidth="132.0" text="название товара" />
-      <Label layoutX="192.0" layoutY="209.0" text="количество" />
-      <Label layoutX="192.0" layoutY="243.0" prefHeight="17.0" prefWidth="87.0" text="сумма заказа" />
+      <ChoiceBox fx:id="statusChoiceBox" layoutX="192.0" layoutY="272.0" prefHeight="25.0" prefWidth="116.0" />
+      <Button fx:id="updateButton" layoutX="215.0" layoutY="336.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="73.0" text="Обновить" />
+      <Label fx:id="successMessage" layoutX="171.0" layoutY="311.0" text="Данные успешно обновлены" textFill="#26d020" visible="false" />
+      <Label fx:id="clientNameLabel" layoutX="192.0" layoutY="142.0" prefHeight="17.0" prefWidth="132.0" text="имя клиента" visible="false" />
+      <Label fx:id="prodNameLabel" layoutX="192.0" layoutY="175.0" prefHeight="17.0" prefWidth="132.0" text="название товара" visible="false" />
+      <Label fx:id="amountLabel" layoutX="192.0" layoutY="209.0" text="количество" visible="false" />
+      <Label fx:id="orderPriceLabel" layoutX="192.0" layoutY="243.0" prefHeight="17.0" prefWidth="87.0" text="сумма заказа" visible="false" />
+      <Label layoutX="324.0" layoutY="209.0" text="На складе:" />
+      <Label fx:id="amountOnWareHouseLabel" layoutX="389.0" layoutY="209.0" text="количество" visible="false" />
+      <Label fx:id="warningLabel" layoutX="351.0" layoutY="243.0" text="недостаточно" textFill="#e11111" visible="false" />
    </children>
 </AnchorPane>

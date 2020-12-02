@@ -52,4 +52,8 @@ public class Product implements Serializable {
 
     public String getManufacturer() { return manufacturer; }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
 }

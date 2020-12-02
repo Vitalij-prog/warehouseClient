@@ -1,9 +1,6 @@
 package sample;
 
-import entities.Manufacturer;
-import entities.Order;
-import entities.Product;
-import entities.User;
+import entities.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,6 +22,7 @@ public class ClientSocket extends Application {
     public static String userName; //user object/ session data
 
     public static User user;
+    public static Order order;
 
     public ClientSocket(String addr, int port) {
         try {
@@ -388,6 +386,17 @@ public class ClientSocket extends Application {
         }
         return list;
     }
+    public static ArrayList<Order> getListOrdersByStatus(String status) {
+        ArrayList<Order> list = null;
+        try {
+            objectOutputStream.writeObject("order/getListByStatus");
+            objectOutputStream.writeObject(status);
+            list = (ArrayList<Order>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public static String addOrder(Order order) {
 
@@ -401,4 +410,103 @@ public class ClientSocket extends Application {
         }
         return answer;
     }
+    public static String setOrderById(Order order) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("order/set");
+            objectOutputStream.writeObject(order);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
+    public static String getClientInfoById(int id) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("order/getClientInfoById");
+            objectOutputStream.writeObject(id);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+    //-------------------------------------------------------------supplies-------------------------------------
+
+    public static String addSupply(Supply supply) {
+
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("supply/add");
+            objectOutputStream.writeObject(supply);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
+    public static ArrayList<Supply> getListSupplies() {
+        ArrayList<Supply> list = null;
+        try {
+            objectOutputStream.writeObject("supply/getList");
+            list = (ArrayList<Supply>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ArrayList<Supply> getListSuppliesByUserId(int userId) {
+        ArrayList<Supply> list = null;
+        try {
+            objectOutputStream.writeObject("supply/getListByUserId");
+            objectOutputStream.writeObject(userId);
+            list = (ArrayList<Supply>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static <T> ArrayList<T> getListByStatus(String status,String type) {
+        ArrayList<T> list = null;
+        try {
+            objectOutputStream.writeObject(type + "/getListByStatus");
+            objectOutputStream.writeObject(status);
+            list = (ArrayList<T>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static <T> String setById(T entity, String type) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject(type + "/set");
+            objectOutputStream.writeObject(entity);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
+    public static <T> String add(T object, String entity, String type) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject(entity + "/" + type);
+            objectOutputStream.writeObject(object);
+
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return answer;
+    }
+
 }

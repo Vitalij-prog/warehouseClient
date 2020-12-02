@@ -34,9 +34,16 @@ public class CancelOrderController {
 
         ordersChoiceBox.setOnAction(event -> {
             Order order = ordersChoiceBox.getValue();
-            prodNameLabel.setText(order.getProd_name());
-            amountLabel.setText(Integer.toString(order.getAmount()));
-            orderPriceLabel.setText(Double.toString(order.getPrice()));
+            if(order == null) {
+                prodNameLabel.setText("");
+                amountLabel.setText("");
+                orderPriceLabel.setText("");
+            } else {
+                prodNameLabel.setText(order.getProd_name());
+                amountLabel.setText(Integer.toString(order.getAmount()));
+                orderPriceLabel.setText(Double.toString(order.getPrice()));
+            }
+
         });
 
         cancelButton.setOnAction(event -> {
