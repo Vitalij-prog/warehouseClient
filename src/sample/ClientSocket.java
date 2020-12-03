@@ -375,11 +375,35 @@ public class ClientSocket extends Application {
         return list;
     }
 
+    public static ArrayList<Order> getOrdersLast10Days() {
+        ArrayList<Order> list = null;
+        try {
+            objectOutputStream.writeObject("order/getOrdersLast10Days");
+            list = (ArrayList<Order>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public static ArrayList<Order> getListOrdersByUserId(int userId) {
         ArrayList<Order> list = null;
         try {
             objectOutputStream.writeObject("order/getListByUserId");
             objectOutputStream.writeObject(userId);
+            list = (ArrayList<Order>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ArrayList<Order> getListOrdersByUserIdAndStatus(int userId, String status) {
+        ArrayList<Order> list = null;
+        try {
+            objectOutputStream.writeObject("order/getListByUserIdAndStatus");
+            objectOutputStream.writeObject(userId);
+            objectOutputStream.writeObject(status);
             list = (ArrayList<Order>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -397,6 +421,8 @@ public class ClientSocket extends Application {
         }
         return list;
     }
+
+
 
     public static String addOrder(Order order) {
 
@@ -471,10 +497,10 @@ public class ClientSocket extends Application {
         return list;
     }
 
-    public static <T> ArrayList<T> getListByStatus(String status,String type) {
+    public static <T> ArrayList<T> getListByStatus(String status,String entity, String type) {
         ArrayList<T> list = null;
         try {
-            objectOutputStream.writeObject(type + "/getListByStatus");
+            objectOutputStream.writeObject(entity + "/" + type);
             objectOutputStream.writeObject(status);
             list = (ArrayList<T>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -488,6 +514,18 @@ public class ClientSocket extends Application {
         try {
             objectOutputStream.writeObject(type + "/set");
             objectOutputStream.writeObject(entity);
+            answer = (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
+
+    public static String getProviderInfoById(int id) {
+        String answer = "";
+        try {
+            objectOutputStream.writeObject("supply/getProviderInfoById");
+            objectOutputStream.writeObject(id);
             answer = (String) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

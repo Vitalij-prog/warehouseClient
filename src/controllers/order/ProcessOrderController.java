@@ -92,7 +92,11 @@ public class ProcessOrderController {
 
     private void loadProcessingOrders() {
         ArrayList<Order> list = getListOrdersByStatus("processing");
-        if(list.size() != 0) {
+        if(list.size() == 0) {
+
+            ordersChoiceBox.setDisable(true);
+        } else {
+            ordersChoiceBox.setDisable(false);
             ordersChoiceBox.getItems().setAll(list);
         }
     }

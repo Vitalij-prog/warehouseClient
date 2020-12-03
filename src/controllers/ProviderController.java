@@ -17,6 +17,22 @@ import java.util.ArrayList;
 import static sample.ClientSocket.*;
 
 public class ProviderController {
+
+    @FXML
+    private Label userNameLabel;
+    @FXML
+    private Label userRoleLabel;
+    @FXML
+    private Label suppliesAmountLabel;
+    @FXML
+    private Label productAmountLabel;
+    @FXML
+    private Label sumLabel;
+    @FXML
+    private Button checkProviderInfoButton;
+    @FXML
+    private Button changeProviderInfoButton;
+
     @FXML
     private Button showProductsButton;
     @FXML
@@ -69,6 +85,30 @@ public class ProviderController {
 
     @FXML
     public void initialize() {
+
+        suppliesAmountLabel.setVisible(false);
+        productAmountLabel.setVisible(false);
+        sumLabel.setVisible(false);
+
+        userNameLabel.setText(ClientSocket.user.getUserName());
+        userNameLabel.setVisible(true);
+        userRoleLabel.setText(ClientSocket.user.getRole());
+        userRoleLabel.setVisible(true);
+
+        checkProviderInfoButton.setOnAction(event -> {
+            String answer = getProviderInfoById(ClientSocket.user.getId());
+            String[] values = answer.split("/");
+            suppliesAmountLabel.setText(values[0]);
+            productAmountLabel.setText(values[1]);
+            sumLabel.setText(values[2]);
+            suppliesAmountLabel.setVisible(true);
+            productAmountLabel.setVisible(true);
+            sumLabel.setVisible(true);
+        });
+
+        changeProviderInfoButton.setOnAction(event -> {
+            MainController.createNewStage("../views/user/updateInfo.fxml");
+        });
 
         showProductsButton.setOnAction(event -> {
             ArrayList<Product> list = null;

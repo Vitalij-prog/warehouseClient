@@ -1,6 +1,6 @@
 package controllers.order;
 
-import entities.Manufacturer;
+
 import entities.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,8 +10,7 @@ import sample.ClientSocket;
 
 import java.util.ArrayList;
 
-import static sample.ClientSocket.del;
-import static sample.ClientSocket.getListOrdersByUserId;
+import static sample.ClientSocket.*;
 
 public class CancelOrderController {
 
@@ -43,7 +42,6 @@ public class CancelOrderController {
                 amountLabel.setText(Integer.toString(order.getAmount()));
                 orderPriceLabel.setText(Double.toString(order.getPrice()));
             }
-
         });
 
         cancelButton.setOnAction(event -> {
@@ -57,10 +55,12 @@ public class CancelOrderController {
     }
 
     private void loadProcessingOrders() {
-        ArrayList<Order> list = getListOrdersByUserId(ClientSocket.user.getId());
-        ordersChoiceBox.getItems().setAll(list);
-
+        ArrayList<Order> list = getListOrdersByUserIdAndStatus(ClientSocket.user.getId(), "processing");
+        if(list.size() == 0) {
+            ordersChoiceBox.setDisable(true);
+        } else {
+            ordersChoiceBox.setDisable(false);
+            ordersChoiceBox.getItems().setAll(list);
+        }
     }
-
-
 }

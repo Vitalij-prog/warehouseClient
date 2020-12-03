@@ -27,7 +27,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="527.0" layoutY="33.0" prefHeight="17.0" prefWidth="141.0" text="имя пользователя">
+                        <Label fx:id="userNameLabel" layoutX="527.0" layoutY="33.0" prefHeight="17.0" prefWidth="141.0" text="имя пользователя">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -37,23 +37,23 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="527.0" layoutY="71.0" text="роль пользователя">
+                        <Label fx:id="userRoleLabel" layoutX="527.0" layoutY="71.0" text="роль пользователя">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Button layoutX="490.0" layoutY="137.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="160.0" text="Изменить личные данные" />
+                        <Button fx:id="changeProviderInfoButton" layoutX="490.0" layoutY="137.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="160.0" text="Изменить личные данные" />
                         <Label layoutX="33.0" layoutY="156.0" text="Ваша статистика:">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="106.0" layoutY="199.0" prefHeight="20.0" prefWidth="51.0" text="Заказы:">
+                        <Label layoutX="106.0" layoutY="199.0" prefHeight="20.0" prefWidth="51.0" text="Поставки:">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="182.0" layoutY="199.0" text="заказы пользователя">
+                        <Label fx:id="suppliesAmountLabel" layoutX="182.0" layoutY="199.0" text="поставки пользователя">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -63,7 +63,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="182.0" layoutY="245.0" text="количество товаров">
+                        <Label fx:id="productAmountLabel" layoutX="182.0" layoutY="245.0" text="количество товаров">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -73,12 +73,12 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="182.0" layoutY="291.0" prefHeight="17.0" prefWidth="51.0" text="сумма">
+                        <Label fx:id="sumLabel" layoutX="182.0" layoutY="291.0" prefHeight="17.0" prefWidth="51.0" text="сумма">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Button layoutX="85.0" layoutY="338.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="Просмотр" />
+                        <Button fx:id="checkProviderInfoButton"  layoutX="85.0" layoutY="338.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="Просмотр" />
                     </children></AnchorPane>
             </content>
         </Tab>

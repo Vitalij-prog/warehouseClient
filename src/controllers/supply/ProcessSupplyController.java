@@ -80,8 +80,14 @@ public class ProcessSupplyController {
     }
 
     private void loadProcessingSupplies() {
-        ArrayList<Supply> list = ClientSocket.<Supply>getListByStatus("processing", "supply");
-        suppliesChoiceBox.getItems().setAll(list);
+        ArrayList<Supply> list = ClientSocket.<Supply>getListByStatus("processing", "supply",  "getListByStatus");
+        if(list.size() == 0) {
+            suppliesChoiceBox.setDisable(true);
+        } else {
+            suppliesChoiceBox.setDisable(false);
+            suppliesChoiceBox.getItems().setAll(list);
+        }
+
     }
 
     private void setVisibleInfo(boolean option) {

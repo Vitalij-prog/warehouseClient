@@ -35,6 +35,11 @@ public class Order implements Serializable {
         this.time = time;
     }
 
+    public Order(int amount, String date) {
+        this.amount = amount;
+        this.prod_name = date;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(this.id);

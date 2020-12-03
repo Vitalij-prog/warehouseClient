@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.Modality;
+import sample.ClientSocket;
 import sample.Main;
 import sample.MainController;
 
@@ -25,6 +27,11 @@ import static sample.InputCheck.*;
 
 
 public class AdminController {
+    @FXML
+    private Label adminNameLabel;
+    @FXML
+    private Label adminRoleLabel;
+
     @FXML
     private Button buttonShowProd;
 
@@ -185,9 +192,23 @@ public class AdminController {
     private Button editManufacturersButton;
     @FXML
     private Button delManufacturersButton;
+    
+    //--------------------------------------------------------
+    @FXML
+    private LineChart<String, Number> lineChart;
+    @FXML
+    private CategoryAxis xAxis;
+    @FXML
+    private NumberAxis yAxis;
+    @FXML
+    private Button viewLineChartButton;
 
     @FXML
     void initialize() {
+
+        adminNameLabel.setText(user.getUserName());
+        adminRoleLabel.setText(user.getRole());
+
         ObservableList<String>  orderOptions = FXCollections.observableArrayList("номер", "имя пользователя","название товара", "дата заказа");
         choiceBoxForSearching.setItems(orderOptions);
         choiceBoxForSearching.setValue("product_name");
@@ -302,8 +323,6 @@ public class AdminController {
         buttonDeleteProd.setOnAction(event -> {
             MainController.createNewStage("../views/delProduct.fxml");
         });
-
-
 
 
         buttonSearchProducts.setOnAction(event -> {
@@ -553,7 +572,63 @@ public class AdminController {
         processingSuppliesButton.setOnAction(event -> {
             MainController.createNewStage("../views/supply/processSupply.fxml", processingSuppliesButton);
         });
+        
+        viewLineChartButton.setOnAction(event -> {
 
+            ObservableList<XYChart.Series<Integer,Integer>> seriesList = FXCollections.observableArrayList();
+
+            // Create data set for the first employee and add it to the series
+            ObservableList<XYChart.Data<Integer,Integer>> aList = FXCollections.observableArrayList();
+            aList.add(new XYChart.Data<Integer,Integer>(0,0));
+            aList.add(new XYChart.Data<Integer,Integer>(1,2));
+            aList.add(new XYChart.Data<Integer,Integer>(2,3));
+            aList.add(new XYChart.Data<Integer,Integer>(3,5));
+            aList.add(new XYChart.Data<Integer,Integer>(4,1));
+            aList.add(new XYChart.Data<Integer,Integer>(5,4));
+            aList.add(new XYChart.Data<Integer,Integer>(6,8));
+            aList.add(new XYChart.Data<Integer,Integer>(7,6));
+            aList.add(new XYChart.Data<Integer,Integer>(8,7));
+            aList.add(new XYChart.Data<Integer,Integer>(9,5));
+
+            seriesList.add(new XYChart.Series<Integer,Integer>("Заказы", aList));
+
+           /* categoryAxis.setLabel("Дата");
+            categoryAxis.setStartMargin(0);
+            categoryAxis.setEndMargin(9);
+
+            categoryAxis = new CategoryAxis();*/
+            /*xAxis = new CategoryAxis();
+            yAxis = new NumberAxis("количество заказов", 0,600,100);*/
+
+
+           /* lineChart = new LineChart(xAxis, yAxis);*/
+
+            xAxis.setLabel("число");
+            yAxis.setLabel("количество");
+            ArrayList<Order> orders = getOrdersLast10Days();
+
+            //Preparing the data points for the line
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            for (Order order : orders) {
+               series.getData().add(new XYChart.Data<>(order.getProd_name(), order.getAmount()));
+            }
+            /*series.getData().add(new XYChart.Data<>("OnePlus X", 80));
+            series.getData().add(new XYChart.Data<>("OnePlus One", 123));
+            series.getData().add(new XYChart.Data<>("OnePlus 2", 110));
+            series.getData().add(new XYChart.Data<>("OnePlus 3", 98));
+            series.getData().add(new XYChart.Data<>("OnePlus 3T", 103));
+            series.getData().add(new XYChart.Data<>("OnePlus 5", 123));
+            series.getData().add(new XYChart.Data<>("OnePlus 5T", 134));
+            series.getData().add(new XYChart.Data<>("OnePlus 6", 145));*/
+            //Setting the name to the line (series)
+            series.setName("Заказы");
+            //Setting the data to Line chart
+            lineChart.setTitle("Операции на складе за последние 10 дней");
+            lineChart.setAnimated(false);
+            lineChart.getData().add(series);
+
+
+        });
 
     }
 }

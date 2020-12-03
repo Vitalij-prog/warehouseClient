@@ -128,7 +128,7 @@
                      </columnResizePolicy>
                         </TableView>
                   <Button fx:id="cancelOrderButton" layoutX="567.0" layoutY="303.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="113.0" text="Отменить заказ" />
-                  <Label layoutX="27.0" layoutY="362.0" text="данные не найдены" textFill="#e41616" visible="false" />
+                  <Label fx:id="dataNotFoundLabel" layoutX="27.0" layoutY="362.0" text="данные не найдены" textFill="#e41616" visible="false" />
                     </children>
                 </AnchorPane>
             </content>

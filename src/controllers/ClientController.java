@@ -79,6 +79,8 @@ public class ClientController {
     private TableColumn<Order, Time> ordersColTime;
     @FXML
     private TableColumn<Order, String> ordersColStatus;
+    @FXML
+    private Label dataNotFoundLabel;
 
 
     @FXML
@@ -127,6 +129,7 @@ public class ClientController {
         });
 
         showOrdersButton.setOnAction(event -> {
+            dataNotFoundLabel.setVisible(false);
             ArrayList<Order> list = null;
             try {
                 list = getListOrdersByUserId(ClientSocket.user.getId());
@@ -138,7 +141,11 @@ public class ClientController {
 
             if(list != null) {
                 orders.setAll(list);
+                if(list.size() == 0) {
+                    dataNotFoundLabel.setVisible(true);
+                }
             }
+
             ordersColId.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
             ordersColProdName.setCellValueFactory(new PropertyValueFactory<Order, String>("prod_name"));
             ordersColPrice.setCellValueFactory(new PropertyValueFactory<Order, Double>("price"));

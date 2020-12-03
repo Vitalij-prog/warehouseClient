@@ -5,10 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import sample.ClientSocket;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class WriteOrderInFileController {
     @FXML
@@ -26,21 +24,28 @@ public class WriteOrderInFileController {
         writeOrderButton.setOnAction(event -> {
             try {
                 if(i == 0) {
-                    FileOutputStream f = new FileOutputStream(new File("./src/files/orders.txt"));
-                    ObjectOutputStream o = new ObjectOutputStream(f);
-                    o.writeObject(ClientSocket.order.getId() + "/" +
+                    //OutputStreamWriter outWriter = new OutputStreamWriter(new FileOutputStream(new File("./src/files/orders.txt")), StandardCharsets.UTF_8);
+                    //FileOutputStream f = new FileOutputStream(new File("./src/files/orders.txt"),);
+                    //ObjectOutputStream o = new ObjectOutputStream(outWriter);
+                    //BufferedWriter bw = new BufferedWriter(outWriter);
+
+                    //bw.append(String.valueOf(ClientSocket.order.getId())).append("/").append(ClientSocket.order.getUser_name()).append("/").append(ClientSocket.order.getProd_name()).append("/").append(String.valueOf(ClientSocket.order.getAmount())).append("/").append(String.valueOf(ClientSocket.order.getPrice())).append("/").append(String.valueOf(ClientSocket.order.getDate())).append("\r\n");
+                    i++;
+                    FileWriter fw = new FileWriter("./src/files/orders.txt", true);
+                    String str = ClientSocket.order.getId() + "/" +
                             ClientSocket.order.getUser_name() + "/" +
                             ClientSocket.order.getProd_name() + "/" +
                             ClientSocket.order.getAmount() + "/" +
                             ClientSocket.order.getPrice() + "/" +
-                            ClientSocket.order.getDate() + "/n");
-                    i++;
-                    o.close();
-                    f.close();
+                            ClientSocket.order.getDate() + "\r\n";
+                    fw.write(str);
+                    fw.flush();
+                    fw.close();
+                    //outWriter.close();
+                    //bw.close();
                 }
             } catch(IOException e) {
                 System.out.println(e);
-            } finally {
             }
         });
     }
