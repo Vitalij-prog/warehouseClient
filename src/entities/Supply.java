@@ -55,6 +55,11 @@ public class Supply implements Serializable {
         this.manufacturerId = manufacturerId;
     }
 
+    public Supply(int amount, String date) {
+        this.productAmount = amount;
+        this.productName = date;
+    }
+
     public int getId() {
         return id;
     }

@@ -33,6 +33,9 @@ public class AdminController {
     private Label adminRoleLabel;
 
     @FXML
+    private Button changeUserDataButton;
+
+    @FXML
     private Button buttonShowProd;
 
     @FXML
@@ -89,15 +92,14 @@ public class AdminController {
     @FXML
     private TableColumn<Order, String> col_status;
     @FXML
-    private Button buttonSearch;
+    private Button orderSearchingButton;
     @FXML
-    private ChoiceBox<String> choiceBoxForSearching;
+    private ChoiceBox<String> orderSearchingChoiceBox;
     @FXML
-    private TextField dataSearching;
+    private TextField orderSearchTextField;
     @FXML
-    private Label labelInfo;
-    @FXML
-    private Label labelNotFound;
+    private Label orderInfoLabel;
+
     //-----------------------------------------------------
     @FXML
     private Button showSuppliesButton;
@@ -204,14 +206,28 @@ public class AdminController {
     private Button viewLineChartButton;
 
     @FXML
+    private PieChart pieChart;
+    @FXML
+    private Button showPieChartButton;
+
+    //--------------------------------------------------------
+    @FXML
     void initialize() {
 
-        adminNameLabel.setText(user.getUserName());
-        adminRoleLabel.setText(user.getRole());
+        setUserData();
 
-        ObservableList<String>  orderOptions = FXCollections.observableArrayList("номер", "имя пользователя","название товара", "дата заказа");
-        choiceBoxForSearching.setItems(orderOptions);
-        choiceBoxForSearching.setValue("product_name");
+        changeUserDataButton.setOnAction(event -> {
+            MainController.createNewStage("../views/user/updateInfo.fxml", changeUserDataButton);
+            setUserData();
+        });
+
+        ObservableList<String>  orderOptions = FXCollections.observableArrayList("номеру", "имени пользователя","названию товара", "дате заказа");
+        orderSearchingChoiceBox.setItems(orderOptions);
+        orderSearchingChoiceBox.setValue("номеру");
+
+        ObservableList<String>  suppliesOptions = FXCollections.observableArrayList("номеру", "имени пользователя","названию товара", "дате поставки");
+        searchSuppliesChoiceBox.setItems(suppliesOptions);
+        searchSuppliesChoiceBox.setValue("номеру");
 
         ObservableList<String>  productOptions = FXCollections.observableArrayList("номеру","названию", "количеству", "производителю");
         choiceBoxForProducts.setItems(productOptions);
@@ -225,52 +241,7 @@ public class AdminController {
         choiceBoxUserRole.setItems(userRole);
         choiceBoxUserRole.setValue("client");
 
-        choiceBoxForSearching.setOnAction(event -> choiceBoxForSearching.setValue(choiceBoxForSearching.getValue()));
-
-        buttonSearch.setOnAction(event -> {
-            labelInfo.setVisible(false);
-            labelNotFound.setVisible(false);
-            if(dataSearching.getText().equals("")) {
-                labelNotFound.setVisible(false);
-                labelInfo.setText("поле на заполнено");
-                labelInfo.setVisible(true);
-            } else {
-                labelNotFound.setVisible(false);
-                labelInfo.setVisible(false);
-                if(checkChoiceForSearchingOrders(choiceBoxForSearching.getValue(),dataSearching.getText())) {
-
-                    ArrayList<Order> list = null;
-                    try {
-                        list = getListOrders(choiceBoxForSearching.getValue(), dataSearching.getText());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    ObservableList<Order> orders = FXCollections.observableArrayList();
-
-                    if (list.size() != 0) {
-                        orders.setAll(list);
-
-                        col_id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
-                        col_prodName.setCellValueFactory(new PropertyValueFactory<Order, String>("prod_name"));
-                        col_userName.setCellValueFactory(new PropertyValueFactory<Order, String>("user_name"));
-                        col_price.setCellValueFactory(new PropertyValueFactory<Order, Double>("price"));
-                        col_amount.setCellValueFactory(new PropertyValueFactory<Order, Integer>("amount"));
-                        col_date.setCellValueFactory(new PropertyValueFactory<Order, Date>("date"));
-                        col_time.setCellValueFactory(new PropertyValueFactory<Order, Time>("time"));
-                        col_status.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
-
-                        ordersTableView.setItems(orders);
-                    } else {
-                        labelNotFound.setText("data not found");
-                        labelNotFound.setVisible(true);
-                    }
-                } else {
-                    labelInfo.setText("incorrect input");
-                    labelInfo.setVisible(true);
-                }
-            }
-        });
+        //orderSearchingChoiceBox.setOnAction(event -> orderSearchingChoiceBox.setValue(orderSearchingChoiceBox.getValue()));
 
         buttonShowProd.setOnAction(event -> {
             ArrayList<Product> list = null;
@@ -543,6 +514,47 @@ public class AdminController {
             MainController.createNewStage("../views/order/processOrder.fxml", buttonOrderProcessing);
         });
 
+        orderSearchingButton.setOnAction(event -> {
+            orderInfoLabel.setVisible(false);
+            if(orderSearchTextField.getText().equals("")) {
+                orderInfoLabel.setText("поле на заполнено");
+                orderInfoLabel.setVisible(true);
+            } else {
+                if(checkChoiceForSearchingOrders(orderSearchingChoiceBox.getValue(),orderSearchTextField.getText())) {
+
+                    ArrayList<Order> list = null;
+                    try {
+                        list = ClientSocket.<Order>search("order", orderSearchingChoiceBox.getValue(), orderSearchTextField.getText());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    ObservableList<Order> orders = FXCollections.observableArrayList();
+
+                    if (list.size() != 0) {
+                        orders.setAll(list);
+
+                        col_id.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
+                        col_prodName.setCellValueFactory(new PropertyValueFactory<Order, String>("prod_name"));
+                        col_userName.setCellValueFactory(new PropertyValueFactory<Order, String>("user_name"));
+                        col_price.setCellValueFactory(new PropertyValueFactory<Order, Double>("price"));
+                        col_amount.setCellValueFactory(new PropertyValueFactory<Order, Integer>("amount"));
+                        col_date.setCellValueFactory(new PropertyValueFactory<Order, Date>("date"));
+                        col_time.setCellValueFactory(new PropertyValueFactory<Order, Time>("time"));
+                        col_status.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
+
+                        ordersTableView.setItems(orders);
+                    } else {
+                        orderInfoLabel.setText("данные не найдены");
+                        orderInfoLabel.setVisible(true);
+                    }
+                } else {
+                    orderInfoLabel.setText("некорректный ввод");
+                    orderInfoLabel.setVisible(true);
+                }
+            }
+        });
+
         //--------------------------------------Supplies----------------------
 
         showSuppliesButton.setOnAction(event -> {
@@ -571,6 +583,48 @@ public class AdminController {
 
         processingSuppliesButton.setOnAction(event -> {
             MainController.createNewStage("../views/supply/processSupply.fxml", processingSuppliesButton);
+        });
+
+        searchSuppliesButton.setOnAction(event -> {
+            searchSuppliesLabel.setVisible(false);
+            if(searchSuppliesTextField.getText().equals("")) {
+                searchSuppliesLabel.setText("поле на заполнено");
+                searchSuppliesLabel.setVisible(true);
+            } else {
+                if( checkChoiceForSearchingSupplies(searchSuppliesChoiceBox.getValue(), searchSuppliesTextField.getText())) {
+
+                    ArrayList<Supply> list = null;
+                    try {
+                        list = ClientSocket.<Supply>search("supply", searchSuppliesChoiceBox.getValue(), searchSuppliesTextField.getText());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    ObservableList<Supply> supplies = FXCollections.observableArrayList();
+
+                    if (list.size() != 0) {
+                        supplies.setAll(list);
+
+                        supplyColId.setCellValueFactory(new PropertyValueFactory<Supply, Integer>("id"));
+                        supplyColUserName.setCellValueFactory(new PropertyValueFactory<Supply, String>("providerName"));
+                        supplyColProdName.setCellValueFactory(new PropertyValueFactory<Supply, String>("productName"));
+                        supplyColProdPrice.setCellValueFactory(new PropertyValueFactory<Supply, Double>("productPrice"));
+                        supplyColProdAmount.setCellValueFactory(new PropertyValueFactory<Supply, Integer>("productAmount"));
+                        supplyColManufacturer.setCellValueFactory(new PropertyValueFactory<Supply, String>("manufacturerName"));
+                        supplyColDate.setCellValueFactory(new PropertyValueFactory<Supply, Date>("date"));
+                        supplyColTime.setCellValueFactory(new PropertyValueFactory<Supply, Time>("time"));
+                        supplyColStatus.setCellValueFactory(new PropertyValueFactory<Supply, String>("status"));
+
+                        suppliesTableView.setItems(supplies);
+                    } else {
+                        searchSuppliesLabel.setText("данные не найдены");
+                        searchSuppliesLabel.setVisible(true);
+                    }
+                } else {
+                    searchSuppliesLabel.setText("некорректный ввод");
+                    searchSuppliesLabel.setVisible(true);
+                }
+            }
         });
         
         viewLineChartButton.setOnAction(event -> {
@@ -606,29 +660,47 @@ public class AdminController {
             xAxis.setLabel("число");
             yAxis.setLabel("количество");
             ArrayList<Order> orders = getOrdersLast10Days();
+            ArrayList<Supply> supplies = getSuppliesLastDays();
 
             //Preparing the data points for the line
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            XYChart.Series<String, Number> series1 = new XYChart.Series<>();
             for (Order order : orders) {
-               series.getData().add(new XYChart.Data<>(order.getProd_name(), order.getAmount()));
+               series1.getData().add(new XYChart.Data<>(order.getProd_name(), order.getAmount()));
             }
+            XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+            for (Supply supply : supplies) {
+                series2.getData().add(new XYChart.Data<>(supply.getProductName(), supply.getProductAmount()));
+            }
+
             /*series.getData().add(new XYChart.Data<>("OnePlus X", 80));
             series.getData().add(new XYChart.Data<>("OnePlus One", 123));
-            series.getData().add(new XYChart.Data<>("OnePlus 2", 110));
-            series.getData().add(new XYChart.Data<>("OnePlus 3", 98));
-            series.getData().add(new XYChart.Data<>("OnePlus 3T", 103));
-            series.getData().add(new XYChart.Data<>("OnePlus 5", 123));
-            series.getData().add(new XYChart.Data<>("OnePlus 5T", 134));
-            series.getData().add(new XYChart.Data<>("OnePlus 6", 145));*/
+            series.getData().add(new XYChart.Data<>("OnePlus 2", 110));*/
             //Setting the name to the line (series)
-            series.setName("Заказы");
+            series1.setName("Заказы");
+            series2.setName("Поставки");
             //Setting the data to Line chart
             lineChart.setTitle("Операции на складе за последние 10 дней");
             lineChart.setAnimated(false);
-            lineChart.getData().add(series);
+            lineChart.getData().add(series1);
+            lineChart.getData().add(series2);
 
 
         });
 
+        showPieChartButton.setOnAction(event -> {
+            ObservableList<PieChart.Data> valueList = FXCollections.observableArrayList(
+                    new PieChart.Data("Cats", 50),
+                    new PieChart.Data("Dogs", 50));
+            pieChart.setData(valueList);
+            pieChart.setTitle("Cats and Dogs");
+        });
+
+    }
+
+    public void setUserData() {
+        adminNameLabel.setText(user.getUserName());
+        adminNameLabel.setVisible(true);
+        adminRoleLabel.setText(user.getRole());
+        adminRoleLabel.setVisible(true);
     }
 }

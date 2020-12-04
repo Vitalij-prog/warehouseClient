@@ -86,10 +86,7 @@ public class ClientController {
     @FXML
     public void initialize() {
 
-        userNameLabel.setText(ClientSocket.user.getUserName());
-        userNameLabel.setVisible(true);
-        userRoleLabel.setText(ClientSocket.user.getRole());
-        userRoleLabel.setVisible(true);
+        setUserData();
 
         checkClientInfoButton.setOnAction(event -> {
             String answer = getClientInfoById(ClientSocket.user.getId());
@@ -103,7 +100,8 @@ public class ClientController {
         });
 
         changeClientInfoButton.setOnAction(event -> {
-            MainController.createNewStage("../views/user/updateInfo.fxml");
+            MainController.createNewStage("../views/user/updateInfo.fxml", changeClientInfoButton);
+            setUserData();
         });
 
 
@@ -167,5 +165,11 @@ public class ClientController {
 
     }
 
+    public void setUserData() {
+        userNameLabel.setText(ClientSocket.user.getUserName());
+        userNameLabel.setVisible(true);
+        userRoleLabel.setText(ClientSocket.user.getRole());
+        userRoleLabel.setVisible(true);
+    }
 
 }

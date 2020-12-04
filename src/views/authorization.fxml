@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1b1b1b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AuthorizationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7dadfc;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AuthorizationController">
     <children>
-        <Button fx:id="logInButton" layoutX="271.0" layoutY="274.0" mnemonicParsing="false" onAction="#logIn" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: #dab913;" text="Войти" textFill="#1b1b1b" />
-        <Button fx:id="signUpButton" layoutX="495.0" layoutY="20.0" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #dab913;" text="Регистрация" textFill="#1b1b1b" />
-        <PasswordField fx:id="passwordField" layoutX="209.0" layoutY="189.0" prefHeight="38.0" prefWidth="184.0" promptText="пароль">
+        <Button fx:id="logInButton" layoutX="264.0" layoutY="274.0" mnemonicParsing="false" onAction="#logIn" prefHeight="38.0" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Войти" textFill="#000000" />
+        <Button fx:id="signUpButton" layoutX="495.0" layoutY="20.0" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #ffffff;" text="Регистрация" textFill="#000000" />
+        <PasswordField fx:id="passwordField" layoutX="209.0" layoutY="189.0" prefHeight="38.0" prefWidth="184.0" promptText="пароль" style="-fx-background-color: #fff;">
             <font>
                 <Font size="14.0" />
             </font></PasswordField>
-        <TextField fx:id="loginField" layoutX="208.0" layoutY="128.0" prefHeight="38.0" prefWidth="184.0" promptText="имя пользователя">
+        <TextField fx:id="loginField" layoutX="208.0" layoutY="128.0" prefHeight="38.0" prefWidth="184.0" promptText="имя пользователя" style="-fx-background-color: #fff;">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <Label layoutX="119.0" layoutY="45.0" prefHeight="38.0" prefWidth="363.0" text="Программа ведения складского  учета" textAlignment="CENTER" textFill="#dab913">
+        <Label layoutX="119.0" layoutY="45.0" prefHeight="38.0" prefWidth="363.0" text="Программа ведения складского  учета" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="20.0" />
             </font>
@@ -29,7 +29,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="195.0" layoutY="79.0" text="и регистрации заказов" textFill="#dab913">
+      <Label layoutX="195.0" layoutY="79.0" text="и регистрации заказов" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

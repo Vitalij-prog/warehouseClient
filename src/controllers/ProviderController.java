@@ -86,14 +86,11 @@ public class ProviderController {
     @FXML
     public void initialize() {
 
+        seUserData();
+
         suppliesAmountLabel.setVisible(false);
         productAmountLabel.setVisible(false);
         sumLabel.setVisible(false);
-
-        userNameLabel.setText(ClientSocket.user.getUserName());
-        userNameLabel.setVisible(true);
-        userRoleLabel.setText(ClientSocket.user.getRole());
-        userRoleLabel.setVisible(true);
 
         checkProviderInfoButton.setOnAction(event -> {
             String answer = getProviderInfoById(ClientSocket.user.getId());
@@ -108,6 +105,7 @@ public class ProviderController {
 
         changeProviderInfoButton.setOnAction(event -> {
             MainController.createNewStage("../views/user/updateInfo.fxml");
+            seUserData();
         });
 
         showProductsButton.setOnAction(event -> {
@@ -161,8 +159,13 @@ public class ProviderController {
         cancelSupplyButton.setOnAction(event -> {
             MainController.createNewStage("../views/supply/cancelSupply.fxml", cancelSupplyButton);
         });
-
     }
 
+    public void seUserData() {
+        userNameLabel.setText(ClientSocket.user.getUserName());
+        userNameLabel.setVisible(true);
+        userRoleLabel.setText(ClientSocket.user.getRole());
+        userRoleLabel.setVisible(true);
+    }
 
 }

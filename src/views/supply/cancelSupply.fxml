@@ -6,7 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.supply.CancelSupplyController">
+<AnchorPane prefHeight="300.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.supply.CancelSupplyController">
     <children>
         <Label layoutX="20.0" layoutY="14.0" text="Отмена поставок">
             <font>
@@ -21,7 +24,7 @@
         <Label fx:id="amountLabel" layoutX="153.0" layoutY="185.0" prefHeight="17.0" prefWidth="79.0" text="кол-во" visible="false" />
         <Button fx:id="cancelButton" layoutX="158.0" layoutY="241.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="70.0" text="Отменить" />
         <Label fx:id="successMessage" layoutX="140.0" layoutY="216.0" text="поставка отменена" textFill="#15da22" visible="false" />
-      <Label layoutX="47.0" layoutY="150.0" text="Производитель:" />
-      <Label layoutX="154.0" layoutY="150.0" prefHeight="17.0" prefWidth="128.0" text="производитель" visible="false" />
+        <Label layoutX="47.0" layoutY="150.0" text="Производитель:" />
+        <Label fx:id="manufacturerLabel"  layoutX="154.0" layoutY="150.0" prefHeight="17.0" prefWidth="128.0" text="производитель" visible="false" />
     </children>
 </AnchorPane>

@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.ClientSocket;
@@ -20,6 +21,7 @@ public abstract class MainController {
             Parent root = loader.load();
             stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image("file:src/img/icon.png"));
             /*if(loader.getController() instanceof ClientMenu) {
                 ClientMenu clientMenu = loader.getController();
                 clientMenu.setUserData(userName);
@@ -41,6 +43,7 @@ public abstract class MainController {
             Parent root = loader.load();
             stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image("file:src/img/icon.png"));
             /*if(loader.getController() instanceof ClientMenu) {
                 ClientMenu clientMenu = loader.getController();
                 clientMenu.setUserData(userName);
@@ -66,7 +69,7 @@ public abstract class MainController {
         Parent main = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(main));
-
+        stage.getIcons().add(new Image("file:src/img/icon.png"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
 
@@ -86,20 +89,10 @@ public abstract class MainController {
         Parent main = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(main));
+        stage.getIcons().add(new Image("file:src/img/icon.png"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(primaryStage);
         stage.showAndWait();
-
     }
-    /*public static String getUserNameFromController(String fileName) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainController.class.getResource(fileName));
-        ClientMenu clientMenu = null;
-        if(loader.getController() instanceof ClientMenu) {
-            clientMenu = loader.getController();
-        }
-        String[] data = clientMenu.getUserName().split(", ");
 
-        return data[1];
-    }*/
 }

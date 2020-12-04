@@ -79,21 +79,39 @@ public class InputCheck {
     public static boolean checkChoiceForSearchingOrders(String option, String data) {
         boolean res = true;
         switch(option) {
-            case "product_name":
-                res = isCorrectString(data,LENGTH_PRODUCT_NAME);
+            case "номеру":
+                res = isInteger(data);
                 break;
-            case "user_name":
+            case "имени пользователя":
                 res = isCorrectString(data,LENGTH_USER_NAME);
                 break;
-            case "price":
-                res = isDouble(data);
+            case "названию товара":
+                res = isCorrectString(data, LENGTH_PRODUCT_NAME);
                 break;
-            case "date":
+            case "дате заказа":
                 res = isDate(data);
                 break;
         }
         return res;
     }
 
+    public static boolean checkChoiceForSearchingSupplies(String option, String data) {
+        boolean res = true;
+        switch(option) {
+            case "номеру":
+                res = isInteger(data);
+                break;
+            case "имени пользователя":
+                res = isCorrectString(data,LENGTH_USER_NAME);
+                break;
+            case "названию товара":
+                res = isCorrectString(data, LENGTH_PRODUCT_NAME);
+                break;
+            case "дате поставки":
+                res = isDate(data);
+                break;
+        }
+        return res;
+    }
 
 }

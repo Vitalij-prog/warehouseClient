@@ -55,7 +55,7 @@ public class CancelOrderController {
     }
 
     private void loadProcessingOrders() {
-        ArrayList<Order> list = getListOrdersByUserIdAndStatus(ClientSocket.user.getId(), "processing");
+        ArrayList<Order> list = getListByUserIdAndStatus("order",ClientSocket.user.getId(), "processing");
         if(list.size() == 0) {
             ordersChoiceBox.setDisable(true);
         } else {

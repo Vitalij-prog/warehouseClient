@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import sample.ClientSocket;
+import sample.MainController;
 
 import java.util.ArrayList;
 
@@ -53,6 +54,7 @@ public class ProcessSupplyController {
             amountLabel.setText(Integer.toString(supply.getProductAmount()));
             setVisibleInfo(true);
             updateButton.setDisable(false);
+            successMessage.setVisible(false);
         });
 
         updateButton.setOnAction(event -> {
@@ -66,6 +68,8 @@ public class ProcessSupplyController {
                 String answer = add(product, "product", "addFromSupply");
                 if(answer.equals("success")) {
                     System.out.println("add supply successfully");
+                    ClientSocket.supply = this.supply;
+                    MainController.createNewStage("/views/supply/writeSupply.fxml", updateButton);
                 }
 
             }

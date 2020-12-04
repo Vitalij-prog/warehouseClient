@@ -13,6 +13,8 @@ public class WriteOrderInFileController {
     private Label orderIdLabel;
     @FXML
     private Button writeOrderButton;
+    @FXML
+    private Label successLabel;
     int i = 0;
 
     @FXML
@@ -24,12 +26,6 @@ public class WriteOrderInFileController {
         writeOrderButton.setOnAction(event -> {
             try {
                 if(i == 0) {
-                    //OutputStreamWriter outWriter = new OutputStreamWriter(new FileOutputStream(new File("./src/files/orders.txt")), StandardCharsets.UTF_8);
-                    //FileOutputStream f = new FileOutputStream(new File("./src/files/orders.txt"),);
-                    //ObjectOutputStream o = new ObjectOutputStream(outWriter);
-                    //BufferedWriter bw = new BufferedWriter(outWriter);
-
-                    //bw.append(String.valueOf(ClientSocket.order.getId())).append("/").append(ClientSocket.order.getUser_name()).append("/").append(ClientSocket.order.getProd_name()).append("/").append(String.valueOf(ClientSocket.order.getAmount())).append("/").append(String.valueOf(ClientSocket.order.getPrice())).append("/").append(String.valueOf(ClientSocket.order.getDate())).append("\r\n");
                     i++;
                     FileWriter fw = new FileWriter("./src/files/orders.txt", true);
                     String str = ClientSocket.order.getId() + "/" +
@@ -41,8 +37,8 @@ public class WriteOrderInFileController {
                     fw.write(str);
                     fw.flush();
                     fw.close();
-                    //outWriter.close();
-                    //bw.close();
+                    successLabel.setVisible(true);
+                    writeOrderButton.setDisable(true);
                 }
             } catch(IOException e) {
                 System.out.println(e);

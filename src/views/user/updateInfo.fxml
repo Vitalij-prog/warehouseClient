@@ -16,12 +16,12 @@
       </Label>
       <Label layoutX="26.0" layoutY="136.0" text="Новое имя:" />
       <Label layoutX="45.0" layoutY="193.0" text="Пароль:" />
-      <Button layoutX="141.0" layoutY="246.0" mnemonicParsing="false" text="Обновить" />
-      <TextField layoutX="102.0" layoutY="132.0" />
-      <TextField layoutX="102.0" layoutY="189.0" />
-      <Label layoutX="134.0" layoutY="165.0" text="имя уже занято" textFill="#e11919" visible="false" />
-      <Label layoutX="113.0" layoutY="223.0" text="не все поля заполенны" textFill="#e11919" visible="false" />
-      <Label layoutX="111.0" layoutY="104.0" text="Имя успешно изменено" textFill="#2ed019" visible="false" />
+      <Button fx:id="updateNameButton" layoutX="141.0" layoutY="246.0" mnemonicParsing="false" text="Обновить" />
+      <TextField fx:id="userNameTextField" layoutX="102.0" layoutY="132.0" />
+      <TextField fx:id="currentPasswordTextField" layoutX="102.0" layoutY="189.0" />
+      <Label fx:id="takenNameLabel" layoutX="134.0" layoutY="165.0" text="имя уже занято" textFill="#e11919" visible="false" />
+      <Label fx:id="emptyFields1Label" layoutX="113.0" layoutY="223.0" text="не все поля заполенны" textFill="#e11919" visible="false" />
+      <Label fx:id="successUpdateNameLabel" layoutX="111.0" layoutY="104.0" text="Имя успешно изменено" textFill="#2ed019" visible="false" />
       <Label layoutX="143.0" layoutY="65.0" text="Новое имя">
          <font>
             <Font size="14.0" />
@@ -35,12 +35,12 @@
       <Label layoutX="342.0" layoutY="136.0" text="Старый пароль:" />
       <Label layoutX="344.0" layoutY="195.0" text="Новый пароль:" />
       <Label layoutX="322.0" layoutY="250.0" text="Повторите пароль:" />
-      <TextField layoutX="449.0" layoutY="132.0" />
-      <TextField layoutX="449.0" layoutY="189.0" />
-      <TextField layoutX="449.0" layoutY="246.0" />
-      <Button layoutX="488.0" layoutY="308.0" mnemonicParsing="false" text="Обновить" />
-      <Label layoutX="452.0" layoutY="104.0" text="Пароль успешно изменен" textFill="#2ed019" visible="false" />
-      <Label layoutX="460.0" layoutY="283.0" text="не все поля заполнены" textFill="#e11919" visible="false" />
-      <Label layoutX="474.0" layoutY="165.0" text="неверный пароль" textFill="#e11919" visible="false" />
+      <TextField fx:id="oldPasswordTextField" layoutX="449.0" layoutY="132.0" />
+      <TextField fx:id="newPasswordTextField" layoutX="449.0" layoutY="189.0" />
+      <TextField fx:id="repeatPasswordTextField" layoutX="449.0" layoutY="246.0" />
+      <Button fx:id="updatePasswordButton" layoutX="488.0" layoutY="308.0" mnemonicParsing="false" text="Обновить" />
+      <Label fx:id="successUpdatePasswordLabel" layoutX="452.0" layoutY="104.0" text="Пароль успешно изменен" textFill="#2ed019" visible="false" />
+      <Label fx:id="emptyFields2Label" layoutX="460.0" layoutY="283.0" text="не все поля заполнены" textFill="#e11919" visible="false" />
+      <Label fx:id="wrongPasswordLabel" layoutX="474.0" layoutY="165.0" text="неверный пароль" textFill="#e11919" visible="false" />
    </children>
 </AnchorPane>

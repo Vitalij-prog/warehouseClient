@@ -76,9 +76,9 @@ public class RegistrationController {
                     if(answer.equals("")) {
                         userNameExistWarning.setVisible(true);
                     } else if(answer.equals("client")) {
-                        display_page("../views/client.fxml", registerButton);
+                        display_page("../views/authorization.fxml", registerButton);
                     } else if(answer.equals("provider")) {
-                        display_page("../views/provider.fxml", registerButton);
+                        display_page("../views/authorization.fxml", registerButton);
                     }
                 } else {
                     notEqualPasswordsWarning.setVisible(true);

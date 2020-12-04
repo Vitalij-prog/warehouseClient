@@ -45,7 +45,7 @@ public class AuthorizationController {
         if(!loginText.equals("") && !passwordText.equals(""))
             loginUser(loginText,passwordText);
         else {
-            labelWrong.setText("Не все поля заполнены");
+            labelWrong.setText("         не все поля заполнены");
             labelWrong.setVisible(true);
         }
 
@@ -79,7 +79,7 @@ public class AuthorizationController {
                         break;
                 }
             } else {
-                labelWrong.setText("Вам временно ограничен вход в систему");
+                labelWrong.setText("вам временно ограничен вход в систему");
                 labelWrong.setVisible(true);
             }
         } else {

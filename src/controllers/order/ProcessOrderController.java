@@ -60,6 +60,7 @@ public class ProcessOrderController {
             amountOnWareHouseLabel.setText(Integer.toString(product.getAmount()));
             setVisibleInfo(true);
             updateButton.setDisable(false);
+            successMessage.setVisible(false);
         });
 
         updateButton.setOnAction(event -> {
