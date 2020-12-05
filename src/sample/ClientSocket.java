@@ -121,6 +121,18 @@ public class ClientSocket extends Application {
         return list;
     }
 
+    public static ArrayList<Product> getInfoProducts() {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            objectOutputStream.writeObject("product/getInfo");
+
+            list = (ArrayList<Product>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
 
     public static ArrayList<Order> getListOrders(String option, String dataSearching) throws Exception {

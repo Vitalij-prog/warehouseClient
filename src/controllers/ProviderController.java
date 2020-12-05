@@ -15,6 +15,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import static sample.ClientSocket.*;
+import static sample.InputCheck.checkChoiceForSearchingProducts;
 
 public class ProviderController {
 
@@ -88,6 +89,10 @@ public class ProviderController {
 
         seUserData();
 
+        ObservableList<String>  productOptions = FXCollections.observableArrayList("номеру","названию", "количеству");
+        searchProductsChoiceBox.setItems(productOptions);
+        searchProductsChoiceBox.setValue("названию");
+
         suppliesAmountLabel.setVisible(false);
         productAmountLabel.setVisible(false);
         sumLabel.setVisible(false);
@@ -127,6 +132,44 @@ public class ProviderController {
             productsColAmount.setCellValueFactory(new PropertyValueFactory<Product, Integer>("amount"));
             productsColManufacturer.setCellValueFactory(new PropertyValueFactory<Product, String>("manufacturer"));
             productsTableView.setItems(products);
+        });
+
+        searchProductsButton.setOnAction(event -> {
+            productNotFoundLabel.setVisible(false);
+            if(searchProductsTextField.getText().equals("")) {
+
+                productNotFoundLabel.setText("поле не заполнено");
+                productNotFoundLabel.setVisible(true);
+            } else {
+
+                if(checkChoiceForSearchingProducts( searchProductsChoiceBox.getValue(),searchProductsTextField.getText())) {
+                    ArrayList<Product> list = null;
+                    try {
+                        list = searchProducts( searchProductsChoiceBox.getValue(), searchProductsTextField.getText());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    ObservableList<Product> products = FXCollections.observableArrayList();
+
+                    if (list.size() != 0) {
+                        products.setAll(list);
+
+                        productsColId.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
+                        productsColName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+                        productsColPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
+                        productsColAmount.setCellValueFactory(new PropertyValueFactory<Product, Integer>("amount"));
+                        productsColManufacturer.setCellValueFactory(new PropertyValueFactory<Product, String>("manufacturer"));
+                        productsTableView.setItems(products);
+                    } else {
+                        productNotFoundLabel.setText("данные не найдены");
+                        productNotFoundLabel.setVisible(true);
+                    }
+                } else {
+                    productNotFoundLabel.setText("некорректный ввод");
+                    productNotFoundLabel.setVisible(true);
+                }
+            }
         });
 
         showSuppliesButton.setOnAction(event -> {

@@ -26,8 +26,10 @@ public class Product implements Serializable {
         this.type = type;
         this.manufacturer = manufacturer;
     }
-    public Product(String name) {
-        this.name = name;
+    public Product(int amount,  String type) {
+
+        this.amount = amount;
+        this.type = type;
     }
 
     public int getId() {

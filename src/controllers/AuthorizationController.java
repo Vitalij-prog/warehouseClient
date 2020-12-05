@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.ClientSocket;
 import sample.MainController;
@@ -45,7 +46,7 @@ public class AuthorizationController {
         if(!loginText.equals("") && !passwordText.equals(""))
             loginUser(loginText,passwordText);
         else {
-            labelWrong.setText("         не все поля заполнены");
+            labelWrong.setText("              не все поля заполнены");
             labelWrong.setVisible(true);
         }
 
@@ -86,7 +87,6 @@ public class AuthorizationController {
             labelWrong.setText("неверное имя пользователя или пароль");
             labelWrong.setVisible(true);
         }
-
     }
 
     @FXML
@@ -106,6 +106,7 @@ public class AuthorizationController {
         Parent main = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(main));
+        stage.getIcons().add(new Image("file:src/img/icon.png"));
         stage.showAndWait();
 
     }

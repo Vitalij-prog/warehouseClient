@@ -48,7 +48,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <Label layoutX="106.0" layoutY="199.0" prefHeight="20.0" prefWidth="51.0" text="Поставки:">
+                        <Label layoutX="92.0" layoutY="199.0" prefHeight="20.0" prefWidth="65.0" text="Поставки:">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -78,7 +78,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Button fx:id="checkProviderInfoButton"  layoutX="85.0" layoutY="338.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="Просмотр" />
+                        <Button fx:id="checkProviderInfoButton" layoutX="85.0" layoutY="338.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="Просмотр" />
                     </children></AnchorPane>
             </content>
         </Tab>
@@ -111,9 +111,9 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Button fx:id="showSuppliesButton" layoutX="33.0" layoutY="303.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="72.0" text="Просмотр" />
-                        <Button fx:id="newSupplyButton" layoutX="167.0" layoutY="303.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="106.0" text="Оформить поставку" />
-                        <TableView fx:id="suppliesTableView" layoutX="27.0" layoutY="26.0" prefHeight="247.0" prefWidth="653.0">
+                        <Button fx:id="showSuppliesButton" layoutX="27.0" layoutY="339.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="72.0" text="Просмотр" />
+                        <Button fx:id="newSupplyButton" layoutX="168.0" layoutY="338.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="133.0" text="Оформить поставку" />
+                        <TableView fx:id="suppliesTableView" layoutX="27.0" layoutY="26.0" prefHeight="280.0" prefWidth="653.0">
                             <columns>
                                 <TableColumn fx:id="suppliesColId" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" resizable="false" sortable="false" text="номер" />
                                 <TableColumn fx:id="suppliesColProdName" maxWidth="130.0" minWidth="130.0" prefWidth="94.0" text="навзание товара" />
@@ -128,7 +128,7 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="cancelSupplyButton" layoutX="343.0" layoutY="303.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="113.0" text="Отменить заказ" />
+                        <Button fx:id="cancelSupplyButton" layoutX="543.0" layoutY="338.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="137.0" text="Отменить поставку" />
                     </children>
                 </AnchorPane>
             </content>

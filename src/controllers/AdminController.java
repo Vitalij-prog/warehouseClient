@@ -688,11 +688,16 @@ public class AdminController {
         });
 
         showPieChartButton.setOnAction(event -> {
-            ObservableList<PieChart.Data> valueList = FXCollections.observableArrayList(
-                    new PieChart.Data("Cats", 50),
-                    new PieChart.Data("Dogs", 50));
+
+            ArrayList<Product> products = getInfoProducts();
+            ObservableList<PieChart.Data> valueList = FXCollections.observableArrayList();
+
+            for (Product product : products) {
+                valueList.add(new PieChart.Data(product.getType(), product.getAmount()));
+            }
+
             pieChart.setData(valueList);
-            pieChart.setTitle("Cats and Dogs");
+            pieChart.setTitle("Продукция на складе по категориям");
         });
 
     }
