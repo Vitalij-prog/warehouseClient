@@ -26,7 +26,7 @@ import static sample.ClientSocket.*;
 import static sample.InputCheck.*;
 
 
-public class AdminController {
+public class AdminController extends MainController {
     @FXML
     private Label adminNameLabel;
     @FXML
@@ -246,7 +246,7 @@ public class AdminController {
         buttonShowProd.setOnAction(event -> {
             ArrayList<Product> list = null;
             try {
-                list = getListProducts();
+                list = getList("product");
                 //getListProducts();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -271,7 +271,7 @@ public class AdminController {
         buttonAddProd.setOnAction(event -> {
             Stage primaryStage = (Stage) buttonAddProd.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../views/addProduct.fxml"));
+            loader.setLocation(getClass().getResource("../views/product/addProduct.fxml"));
 
             try{
                 loader.load();
@@ -288,11 +288,11 @@ public class AdminController {
         });
 
         buttonEditProd.setOnAction(event -> {
-            MainController.createNewStage("../views/editProduct.fxml");
+            createNewStage("../views/product/editProduct.fxml", buttonEditProd);
         });
 
         buttonDeleteProd.setOnAction(event -> {
-            MainController.createNewStage("../views/delProduct.fxml");
+           createNewStage("../views/product/delProduct.fxml",buttonDeleteProd);
         });
 
 
@@ -306,7 +306,7 @@ public class AdminController {
                 if(checkChoiceForSearchingProducts(choiceBoxForProducts.getValue(),textForProductsSearching.getText())) {
                     ArrayList<Product> list = null;
                     try {
-                        list = searchProducts(choiceBoxForProducts.getValue(), textForProductsSearching.getText());
+                        list = search("product", choiceBoxForProducts.getValue(), textForProductsSearching.getText());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -469,22 +469,22 @@ public class AdminController {
         });
 
         addManufacturersButton.setOnAction(event -> {
-            MainController.createNewStage("../views/manufacturer/addManufacturer.fxml");
+            createNewStage("../views/manufacturer/addManufacturer.fxml", addManufacturersButton);
         });
 
         delManufacturersButton.setOnAction(event -> {
-            MainController.createNewStage("../views/manufacturer/delManufacturer.fxml");
+            createNewStage("../views/manufacturer/delManufacturer.fxml", delManufacturersButton);
         });
         editManufacturersButton.setOnAction(event -> {
-            MainController.createNewStage("../views/manufacturer/editManufacturer.fxml");
+            createNewStage("../views/manufacturer/editManufacturer.fxml", editManufacturersButton);
         });
         //------------------------------------------------------------
         deleteUserButton.setOnAction(event -> {
-            MainController.createNewStage("../views/user/delUser.fxml", deleteUserButton);
+            createNewStage("../views/user/delUser.fxml", deleteUserButton);
         });
 
         blockUserButton.setOnAction(event-> {
-            MainController.createNewStage("../views/user/accessControl.fxml", blockUserButton);
+            createNewStage("../views/user/accessControl.fxml", blockUserButton);
         });
         //-------------------------------------------Orders-----------------
         buttonShowOrders.setOnAction(event -> {
@@ -582,7 +582,7 @@ public class AdminController {
         });
 
         processingSuppliesButton.setOnAction(event -> {
-            MainController.createNewStage("../views/supply/processSupply.fxml", processingSuppliesButton);
+            createNewStage("../views/supply/processSupply.fxml", processingSuppliesButton);
         });
 
         searchSuppliesButton.setOnAction(event -> {
@@ -630,32 +630,6 @@ public class AdminController {
         viewLineChartButton.setOnAction(event -> {
 
             ObservableList<XYChart.Series<Integer,Integer>> seriesList = FXCollections.observableArrayList();
-
-            // Create data set for the first employee and add it to the series
-            ObservableList<XYChart.Data<Integer,Integer>> aList = FXCollections.observableArrayList();
-            aList.add(new XYChart.Data<Integer,Integer>(0,0));
-            aList.add(new XYChart.Data<Integer,Integer>(1,2));
-            aList.add(new XYChart.Data<Integer,Integer>(2,3));
-            aList.add(new XYChart.Data<Integer,Integer>(3,5));
-            aList.add(new XYChart.Data<Integer,Integer>(4,1));
-            aList.add(new XYChart.Data<Integer,Integer>(5,4));
-            aList.add(new XYChart.Data<Integer,Integer>(6,8));
-            aList.add(new XYChart.Data<Integer,Integer>(7,6));
-            aList.add(new XYChart.Data<Integer,Integer>(8,7));
-            aList.add(new XYChart.Data<Integer,Integer>(9,5));
-
-            seriesList.add(new XYChart.Series<Integer,Integer>("Заказы", aList));
-
-           /* categoryAxis.setLabel("Дата");
-            categoryAxis.setStartMargin(0);
-            categoryAxis.setEndMargin(9);
-
-            categoryAxis = new CategoryAxis();*/
-            /*xAxis = new CategoryAxis();
-            yAxis = new NumberAxis("количество заказов", 0,600,100);*/
-
-
-           /* lineChart = new LineChart(xAxis, yAxis);*/
 
             xAxis.setLabel("число");
             yAxis.setLabel("количество");

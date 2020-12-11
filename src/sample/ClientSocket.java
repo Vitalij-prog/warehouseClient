@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 import javafx.application.Application;
 
-public class ClientSocket extends Application {
+public class ClientSocket /*extends Application*/ {
     private static Socket client;
     private static ObjectOutputStream objectOutputStream;
     private static ObjectInputStream objectInputStream;
@@ -36,14 +36,14 @@ public class ClientSocket extends Application {
 
     }
 
-    @Override
+   /* @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../views/authorization.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("./src/views/authorization.fxml"));
         primaryStage.setTitle("Авторизация в системе");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-    }
+    }*/
 
     public void close() throws IOException {
         if (client != null) client.close();
@@ -53,21 +53,19 @@ public class ClientSocket extends Application {
 
 
     public void exit() throws IOException {
-        objectOutputStream.writeObject("ex");
+        objectOutputStream.writeObject("exit");
     }
 
-    public static User authorization(String login, String password) throws Exception {
+    public static User authorization(String login, String password) {
         String str = "user/login";
         User user = new User(login, password);
+        try {
         objectOutputStream.writeObject(str);
         objectOutputStream.writeObject(user);
         user = (User) objectInputStream.readObject();
-/*
-        if (answer.equals("user")) {
-            System.out.println("Пользователь " + login + " вошел в программу");
-        } else if (answer.equals("admin")) {
-            System.out.println("Администратор " + login + " вошел в программу");
-        }*/
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return user;
     }
     public static String registrationByUser(User user) {
@@ -87,24 +85,22 @@ public class ClientSocket extends Application {
         return answer;
     }
 
-   /* public static String registrationByUser(String login, String password) throws Exception {
-        String str = "signup" + "/" + login + "/" + password;
-        objectOutputStream.writeObject(str);
-        String answer = (String) objectInputStream.readObject();
-
-        if (answer.equals("success")) {
-
-            System.out.println("user " + login + " is registered successfully");
-        } else  {
-            System.out.println("user " + login + " already exists");
-        }
-        return answer;
-    }*/
-
     public static ArrayList<Product> getListProducts() throws Exception {
 
         objectOutputStream.writeObject("product/getList");
         ArrayList<Product> list = (ArrayList<Product>) objectInputStream.readObject();
+        return list;
+    }
+
+    public static <T> ArrayList<T> getList(String entity) {
+        ArrayList<T> list = new ArrayList<>();
+        try {
+            objectOutputStream.writeObject(entity + "/getList");
+            list = (ArrayList<T>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         return list;
     }
 

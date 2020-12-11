@@ -16,16 +16,14 @@ public class Main extends Application {
         window = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../views/authorization.fxml"));
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
         window.getIcons().add(new Image("file:src/img/icon.png"));
-        window.setTitle("Welcome!");
+        window.setTitle("Авторизация в системе");
         window.setScene(new Scene(root, 600, 400));
         window.show();
 
         client = new ClientSocket("127.0.0.1", 8000);
     }
-
 
     public static void main(String[] args) {
         launch(args);

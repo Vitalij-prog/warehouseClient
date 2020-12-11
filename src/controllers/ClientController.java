@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import static sample.ClientSocket.*;
 import static sample.InputCheck.checkChoiceForSearchingProducts;
 
-public class ClientController {
+public class ClientController extends MainController {
 
     @FXML
     private Label userNameLabel;
@@ -106,7 +106,7 @@ public class ClientController {
         });
 
         changeClientInfoButton.setOnAction(event -> {
-            MainController.createNewStage("../views/user/updateInfo.fxml", changeClientInfoButton);
+            createNewStage("../views/user/updateInfo.fxml", changeClientInfoButton);
             setUserData();
         });
 
@@ -199,10 +199,10 @@ public class ClientController {
         });
 
         newOrderButton.setOnAction(event -> {
-            MainController.createNewStage("../views/order/addOrder.fxml", newOrderButton);
+            createNewStage("../views/order/addOrder.fxml", newOrderButton);
         });
         cancelOrderButton.setOnAction(event -> {
-            MainController.createNewStage("../views/order/cancelOrder.fxml", cancelOrderButton);
+            createNewStage("../views/order/cancelOrder.fxml", cancelOrderButton);
         });
 
 

@@ -1,18 +1,15 @@
 package controllers;
 
 import entities.User;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import sample.MainController;
 
 import static sample.ClientSocket.registrationByUser;
-import static sample.MainController.*;
 
-public class RegistrationController {
-    @FXML
-    private AnchorPane registrationPane;
+
+public class RegistrationController extends MainController {
     @FXML
     private TextField userNameTextField;
     @FXML
@@ -47,9 +44,7 @@ public class RegistrationController {
         providerRadioButton.setToggleGroup(toggleGroup);
 
         toggleGroup.selectedToggleProperty().addListener((changed, oldValue, newValue) -> {
-
             selectedButton = (RadioButton) newValue;
-
         });
 
 
@@ -66,7 +61,7 @@ public class RegistrationController {
 
             if(!userName.equals("") && !password1.equals("") && !password2.equals("")) {
                 if(password1.equals(password2)) {
-                    if(selectedButton.getText().equals("клиент")) {
+                    if(clientRadioButton.isSelected()) {
                         role = "client";
                     } else {
                         role = "provider";
@@ -76,9 +71,9 @@ public class RegistrationController {
                     if(answer.equals("")) {
                         userNameExistWarning.setVisible(true);
                     } else if(answer.equals("client")) {
-                        display_page("../views/authorization.fxml", registerButton);
+                        displayPage("../views/authorization.fxml", registerButton);
                     } else if(answer.equals("provider")) {
-                        display_page("../views/authorization.fxml", registerButton);
+                        displayPage("../views/authorization.fxml", registerButton);
                     }
                 } else {
                     notEqualPasswordsWarning.setVisible(true);
@@ -89,7 +84,7 @@ public class RegistrationController {
         });
 
         loginButton.setOnAction(event -> {
-            display_page("../views/authorization.fxml", loginButton);
+            displayPage("../views/authorization.fxml", loginButton);
         });
     }
 

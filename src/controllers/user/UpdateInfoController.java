@@ -13,7 +13,7 @@ import sample.MainController;
 import java.io.IOException;
 
 import static sample.ClientSocket.setUser;
-import static sample.MainController.display_page;
+
 
 public class UpdateInfoController {
 
@@ -70,7 +70,6 @@ public class UpdateInfoController {
                         successUpdateNameLabel.setVisible(true);
                         ClientSocket.user = user;
 
-                       // display_page("../views/authorization.fxml", updateNameButton);
                     } else {
                         takenNameLabel.setVisible(true);
                     }

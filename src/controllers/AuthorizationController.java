@@ -19,15 +19,12 @@ import java.io.IOException;
 
 import static sample.ClientSocket.authorization;
 
-public class AuthorizationController {
+public class AuthorizationController extends MainController {
     @FXML
     private Button logInButton;
 
     @FXML
     private Button signUpButton;
-
-    /*@FXML
-    private Button signUpButton;*/
 
     @FXML
     private TextField loginField;
@@ -69,14 +66,14 @@ public class AuthorizationController {
                 switch (user.getRole()) {
                     case "client":
                         ClientSocket.userName = loginText;
-                        MainController.display_page("../views/client.fxml", logInButton, loginText);
+                        displayPage("../views/client.fxml", logInButton, loginText);
                         break;
                     case "provider":
-                        MainController.display_page("../views/provider.fxml", logInButton, loginText);
+                        displayPage("../views/provider.fxml", logInButton, loginText);
                         break;
                     case "admin":
                         ClientSocket.userName = loginText;
-                        MainController.display_page("../views/admin.fxml", logInButton, loginText);
+                        displayPage("../views/admin.fxml", logInButton, loginText);
                         break;
                 }
             } else {
@@ -97,12 +94,11 @@ public class AuthorizationController {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../views/registration.fxml"));
 
-        try{
+        try {
             loader.load();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
         Parent main = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(main));

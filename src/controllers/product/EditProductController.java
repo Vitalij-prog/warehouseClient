@@ -1,4 +1,4 @@
-package controllers;
+package controllers.product;
 
 import entities.Product;
 import javafx.fxml.FXML;

@@ -7,12 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.ClientSocket;
+
 
 import java.io.IOException;
 
-public abstract class MainController {
-    public static void display_page(String page, Button btn, String userName) {
+public class MainController {
+    public static void displayPage(String page, Button btn, String userName) {
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
 
@@ -22,19 +22,13 @@ public abstract class MainController {
             stage = new Stage();
             stage.setScene(new Scene(root));
             stage.getIcons().add(new Image("file:src/img/icon.png"));
-            /*if(loader.getController() instanceof ClientMenu) {
-                ClientMenu clientMenu = loader.getController();
-                clientMenu.setUserData(userName);
-                ClientSocket.userName = userName;
-            }*/
-
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void display_page(String page, Button btn) {
+    public static void displayPage(String page, Button btn) {
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
 
@@ -44,12 +38,6 @@ public abstract class MainController {
             stage = new Stage();
             stage.setScene(new Scene(root));
             stage.getIcons().add(new Image("file:src/img/icon.png"));
-            /*if(loader.getController() instanceof ClientMenu) {
-                ClientMenu clientMenu = loader.getController();
-                clientMenu.setUserData(userName);
-                ClientSocket.userName = userName;
-            }*/
-
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,7 +73,6 @@ public abstract class MainController {
         }catch (IOException e) {
             e.printStackTrace();
         }
-
         Parent main = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(main));

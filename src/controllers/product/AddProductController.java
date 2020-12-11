@@ -1,4 +1,4 @@
-package controllers;
+package controllers.product;
 
 import entities.Manufacturer;
 import entities.Product;
